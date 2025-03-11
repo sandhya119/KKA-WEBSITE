@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team</title>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nheader.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css">
+    
+    <!-- FontAwesome Icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <custom-navbar 
+        data-home="{{ url_for('home') }}"
+        data-about="{{ url_for('aboutus') }}"
+        data-news="{{ url_for('news') }}"
+        data-past-events="{{ url_for('past_events') }}"
+        data-upcoming-events="{{ url_for('upcoming_events') }}"
+        data-gallery="{{ url_for('gallery') }}"
+        data-contact="{{ url_for('contact') }}"
+        data-logo="{{ url_for('static', filename='images/logo.png') }}"
+        data-menu-icon="{{ url_for('static', filename='images/hamburger.png') }}"
+        data-authenticated="{{ 'true' if 'user_id' in session else 'false' }}"
+    data-profile="{{ url_for('profile') }}"
+    data-logout="{{ url_for('logout') }}"
+    data-login="{{ url_for('login') }}">
+    </custom-navbar>
+
+    <!-- Main Section -->
+    <section id="mainhead">
+        <div id="popup" class="popup-container" style="display: none;">
+            <div class="popup-content">
+                <p id="poppy">Are you already a part of the family?</p>
+                <button onclick="alreadyMember()">Yes</button>
+                <button onclick="notMember()">No</button>
+                <button class="close-btn" onclick="closePopup()">Close</button>
+            </div>
+        </div>
+
+    <section class="hero">
+        <div class="heroic">
+            <h2>ಸಂಪರ್ಕ</h2>
+            <h2>Contact Us</h2>
+            <p>Karaval Konkan Australia is a not-for-profit community organization formed in October 2024 
+               with an intention to unite all Konkani-speaking people from Karaval India.</p>
+               <div class="carousel">
+                <div class="active"></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                </div>
+       
+    </section>
+
+    <div class="sponsors-wrapper">
+        {% include 'sponsors.html' %}
+    </div>
+    <!-- Footer -->
+    <section>
+        <div class="container1">
+            <footer class="footer">
+                <!-- Column 1: Logo & Socials -->
+                <div class="footer-column">
+                    <img src="{{ url_for('static', filename='images/1.png') }}" alt="Karaval Konkans Logo">
+                    <p>Karaval Konkans Australia is a not-for-profit community organization...</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="mdi mdi-instagram"></i></a>
+                        <a href="#"><i class="mdi mdi-whatsapp"></i></a>
+                        <a href="#"><i class="mdi mdi-facebook"></i></a>
+                        <a href="#"><i class="mdi mdi-youtube"></i></a>
+                    </div>
+                </div>
+
+                <!-- Column 2: Quick Links -->
+                <div class="footer-column1">
+                    <h3>Quick Links</h3>
+                    <div class="footer-links">
+                        <a href="{{ url_for('home') }}">Home</a>
+                        <a href="{{ url_for('aboutus') }}">About Us</a>
+                        <a href="{{ url_for('news') }}">News</a>
+                        <a href="{{ url_for('contact') }}">Contact Us</a>
+                    </div>
+                </div>
+                
+                <!-- Column 3: Contact Information -->
+                <div class="footer-column2">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:info@karavalkonkans.org.au">info@karavalkonkans.org.au</a></p>
+                    <a href="{{ url_for('contact') }}">Contact Us</a>
+                </div>
+
+                <!-- Copyright -->
+                <div class="copyright">
+                    © Karaval Konkans Australia Inc. All rights reserved.
+                </div>
+            </footer>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='scripts/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/header.js') }}"></script>
+
+</body>
+</html>

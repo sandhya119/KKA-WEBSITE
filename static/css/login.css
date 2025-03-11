@@ -1,0 +1,77 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #faf3e0;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Registration Container */
+.login-container {
+    max-width: 520px; 
+    width: 100%;
+    background: #fff;
+    padding: 25px; 
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 2px solid #ccc; /* Equal border for consistency */
+    box-sizing: border-box; /* Ensures padding and border are included in width */
+}
+
+/* Headings */
+h2 {
+    text-align: center;
+    color: #ff9d4d;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+/* Form Styles */
+label {
+    font-weight: 500;
+    color: #333;
+    font-size: 14px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ccc; /* Consistent border */
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+    background: #f9f9f9;
+    margin-bottom: 15px;
+}
+
+/* Buttons */
+button {
+    background-color: #ffc342;
+    color: white;
+    padding: 14px; 
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.3s;
+    margin-top: 10px; 
+}
+
+button:hover {
+    background-color: #ff9d4d;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .login-container {
+        width: 90%; 
+        padding: 20px; 
+        margin: auto; 
+        border: 2px solid #ccc; /* Ensure consistency */
+    }
+}

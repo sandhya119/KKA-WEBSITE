@@ -1,0 +1,186 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+html{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: black; /* Unified background */
+    color: white;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    background:black;
+}
+
+.logo {
+    height: 50px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.join-btn {
+    background: #ff6600;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+/* Hero Section */
+/* .hero {
+    position: relative;
+    width: 100%;
+    height: 100vh; 
+    min-height: 800px; 
+    background: url('/static/images/bck.png') no-repeat center center/cover !important;
+    background-attachment: fixed; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #ffc342;
+    background-size: contain !important;
+    overflow: hidden;
+} */
+/* .hero {
+    background: url('/static/images/bck.png') no-repeat center center/cover !important;
+    background: rgba(0, 0, 0, 0.7); 
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    height: 100vh;
+    color: #ffc342;
+    padding-top: 80px;
+} */
+
+/* .hero{
+    background: url('/static/images/bck.png') no-repeat center center/cover !important; 
+} */
+/* .hero img {
+    width: 100%; 
+    height: auto; 
+    object-fit: contain;
+    max-height: 500px;
+    display: block; 
+    margin: 0 auto; 
+    background: url('/static/images/bck.png') no-repeat center center/cover !important; 
+} */
+/* Hero Section - Ensuring Consistent Image Size */
+/* Hero Section - Fixing Image Cropping */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Ensure consistency */
+    min-height: 900px;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                url('/static/images/bck.png') no-repeat center 40%;
+    background-size: cover !important;
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    color: #ffc342;
+    overflow: hidden;
+    padding: 80px 0;
+}
+
+
+ h1 {
+    font-size: 40px;
+    font-weight: bold;
+    color:#ffc342;
+}
+
+ h2 {
+    font-size: 30px;
+    color:#ffc342;
+}
+
+ p {
+    max-width: 600px;
+    font-size: 18px;
+    color:#ffc342 !important;
+}
+/* .heroic{
+    color:#ffc342 !important;
+} */
+
+
+
+
+
+.footer-column p, 
+.footer-column2 p {
+    color: white !important;
+}
+
+
+/* Footer */
+footer {
+    background: black;
+    color:white;
+    padding: 40px 20px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    text-align: center;
+
+}
+
+.footer-logo img {
+    height: 80px;
+}
+
+.footer-content p {
+    max-width: 300px;
+    color:white;
+}
+
+.quick-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.quick-links ul li a {
+    text-decoration: none;
+    color: white;
+}
+
+.contact p {
+    font-weight: bold;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+}

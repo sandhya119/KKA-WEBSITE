@@ -1,0 +1,72 @@
+.profile-icon {
+    position: fixed; /* Fixes it on the screen */
+    top: 20px;  /* Adjusts vertical position */
+    right: 20px; /* Adjusts horizontal position */
+    font-size: 30px; /* Icon size */
+    color: white;  /* Default color */
+    text-decoration: none; /* Removes underline */
+    transition: color 0.3s ease-in-out; /* Smooth hover effect */
+}
+
+.profile-icon:hover {
+    color: #fdd835; /* Change color on hover */
+}
+/* .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #333;
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+    list-style: none;
+}
+
+.auth-links {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+*/
+/* .action-button {
+    padding: 10px 15px;
+    background-color: #fdd835;
+    color: black;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.action-button:hover {
+    background-color: #c6a700;
+    transform: scale(1.05);
+}  */
+/* Style for the logout button */
+#logout-btn {
+    background-color: #FFB300; /* Golden color */
+    color: white; /* Text color */
+    font-size: 14px; /* Smaller font size */
+    font-weight: bold; /* Bold text */
+    padding: 6px 12px; /* Smaller padding to create a smaller box */
+    border: none; /* No border */
+    border-radius: 20px; /* More rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+    display: inline-block; /* Allows them to sit side by side */
+    margin: 0 5px; /* Add some spacing between buttons */
+}
+
+#logout-btn:hover {
+    background-color: #ff7633; /* Slightly darker golden color on hover */
+    transform: scale(1.05); /* Slight scale-up effect */
+}
+
+#logout-btn:focus {
+    outline: 2px solid #d4a017; /* Outline with the golden color */
+    outline-offset: 4px; /* Offset the outline slightly */
+}
+

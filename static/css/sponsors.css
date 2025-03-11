@@ -1,0 +1,52 @@
+/* Sponsors Section Styles */
+.our-partners {
+    text-align: center;
+    padding: 40px 0;
+    background-color: #f8f8f8 !important;
+    color: #ffc342; /* Text color added */
+    font-size: 24px; /* Uniform text size */
+}
+
+/* Ensure only our sponsors' headings are affected */
+.our-partners h2 {
+    font-size: 32px; /* Set a fixed size */
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.our-partners-container {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+}
+
+.our-partners-list {
+    display: flex;
+    gap: 20px;
+    animation: scroll 10s linear infinite;
+}
+
+.our-partners-list img {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    margin: 10px;
+}
+
+/* Prevent text size issues from other pages */
+.our-partners p {
+    font-size: 18px;
+    color: #333;
+    text-align: center;
+}
+
+/* Animation */
+@keyframes scroll {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}

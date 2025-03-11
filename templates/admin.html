@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+<body>
+
+    <header class="admin-header">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/1.png') }}" alt="Admin Logo">
+        </div>
+        <div class="admin-panel">
+            <img src="{{ url_for('static', filename='images/profile.webp') }}" alt="Admin Avatar" class="profile-img">
+            <span>Admin Panel</span>
+        </div>
+    </header>
+
+
+
+    <div class="container">
+        <div class="sidebar">
+            <!-- <button class="tab-button" onclick="showSection('adminProfile')">Admin Profile</button>
+            <button class="tab-button" onclick="showSection('Dashboard')">Dashboard</button>
+            <button class="tab-button" onclick="showSection('Content Management')">Content Management</button> -->
+            <!-- <button class="tab-button" onclick="showSection('userLogin')">User Login Details</button> -->
+            <!-- <button class="tab-button" onclick="showSection('registrations')">Registrations</button> -->
+            <button class="tab-button" onclick="scrollToSection('adminProfile')">Admin Profile</button>
+<button class="tab-button" onclick="scrollToSection('Dashboard')">Dashboard</button>
+<button class="tab-button" onclick="scrollToSection('Content Management')">Content Management</button>
+<button class="tab-button" onclick="scrollToSection('upcomingEvents')">Upcoming Events Management</button>
+<button class="tab-button" onclick="scrollToSection('pastEvents')">Past Events Management</button>
+<button class="tab-button" onclick="scrollToSection('galleryManagement')">Gallery Management</button>
+<button class="tab-button" onclick="scrollToSection('newsManagement')">News Management</button>
+<button class="tab-button" onclick="scrollToSection('registrations')">Registrations</button>
+
+
+            
+        </div>
+
+        <div class="main-content">
+            <!-- Admin Profile Section -->
+            <div class="section" id="adminProfile">
+                <h3 class="profile-header">Admin Profile</h3>
+                <div class="profile-card">
+                    <div class="profile-avatar">
+                        <img src="{{ url_for('static', filename='images/profile.webp') }}" alt="Admin Avatar" class="avatar-img">
+
+                    </div>
+                    <div class="profile-info">
+                        <!-- <p><strong>Name:</strong> Admin Name</p> -->
+                        <p><strong>Email:</strong> info@karavalkonkans.org.au</p>
+                        <p><strong>Role:</strong> Administrator</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Section -->  
+            <div class="section" id="Dashboard">
+                <h3 style="background-color: rgb(65, 63, 62); padding: 20px; color: white;">Dashboard</h3>
+                <div class="analytics-summary">
+                    <!-- <div class="analytics-card"> -->
+                        <!-- <h4>Total Logins</h4>
+                        <p id="totalLogins">0</p>  -->
+                    <!-- </div> -->
+                    <div class="analytics-card">
+                        <h4>Total Registrations</h4>
+                        <p id="totalUsers">{{ total_users }}</p> <!-- Updated -->
+                    </div>
+                    <!-- <div class="analytics-card">
+                        <h4>Total Event Registrations</h4>
+                        <p id="totalEventRegistrations">{{ total_event_registrations }}</p> 
+                    </div> -->
+                </div>
+
+                <h3 style="margin-top: 20px;">Event-wise Registrations</h3>
+<table class="event-registrations-table">
+    <thead>
+        <tr>
+            <th>Event Name</th>
+            <th>Number of People Registered</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for event, count in event_chart_data %}
+        <tr>
+            <td>{{ event }}</td>
+            <td>{{ count }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+                <div class="chart-container">
+                    <h3>Event Registrations</h3>
+                    <canvas id="eventChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>Event Registrations by City</h3>
+                    <canvas id="eventCityChart"></canvas>
+                </div>
+                
+            </div>
+
+            <!--content uploading-->
+            <div class="section" id="Content Management">
+                <h3 style="background-color: rgb(65, 63, 62); padding: 20px; color: white;">Upload Content</h3>
+            
+                <div class="content-upload">
+                    <form id="contentForm" action="{{ url_for('upload_content') }}" method="POST" enctype="multipart/form-data">
+                        <label>Title:</label>
+                        <input type="text" id="title" name="title" required>
+                
+                        <label>Description:</label>
+                        <input type="text" id="description" name="description" required>
+                
+                        <label>Category:</label>
+                        <select name="category" required>
+                            <option value="upcoming">Upcoming Event</option>
+                            <option value="past">Past Event</option>
+                        </select>
+                
+                        <label>Upload File:</label>
+                        <input type="file" id="file" name="file" accept="image/*,.pdf,.docx">
+                
+                        <button type="submit">Upload</button>
+                    </form>
+                </div>
+
+                <!-- Upcoming Events Management -->
+<div class="section" id="upcomingEvents">
+
+                <h3 style="background-color: rgb(65, 63, 62); padding: 20px; color: white;">Manage Upcoming Events</h3>
+
+                <h2>Upcoming Events</h2>
+                <table class="table table-striped table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for event in upcoming_events %}
+<tr>
+    <td>{{ event[1] }}</td> <!-- Title -->
+    <td>{{ event[2] }}</td> <!-- Description -->
+    <td>
+        <button class="btn btn-danger btn-sm" onclick="deleteEvent('{{ event[0] }}')">
+            Delete
+        </button>
+    </td>
+</tr>
+{% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+            <!-- Past Events Management Section -->
+<div class="section" id="pastEvents">
+    <h3 style="background-color: rgb(65, 63, 62); padding: 20px; color: white;">Manage Past Events</h3>
+
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in past_events %}
+            <tr>
+                <td>{{ event[0] }}</td> <!-- Title -->
+                <td>{{ event[1] }}</td> <!-- Description -->
+                <td>
+                    <button class="btn btn-danger btn-sm" onclick="deleteEvent('{{ event[2] }}')">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+            
+<!-- Gallery Management Section -->
+<div class="section" id="galleryManagement">
+    <h3 style="background-color: rgb(65, 63, 62); padding: 20px; color: white;">Gallery Management</h3>
+
+    <div class="gallery-upload">
+        <form id="galleryForm" action="{{ url_for('upload_gimages') }}" method="POST" enctype="multipart/form-data">
+            <label>Title:</label>
+            <input type="text" id="imageTitle" name="title" placeholder="Enter title" required>
+
+            <label>Description:</label>
+            <input type="text" id="imageDescription" name="description" placeholder="Enter Description" required>
+
+            <label>Upload New Image:</label>
+            <input type="file" id="galleryImage" name="image" accept="image/*" required>
+
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+
+    <h3 style="background-color: rgb(65, 63, 62); padding: 20px; color: white;">Manage Gallery</h3>
+    <h2>Gallery Images</h2>
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for image in gallery_images %}
+            <tr>
+                <td>{{ image[1] }}</td> <!-- Title -->
+                <td>{{ image[2] }}</td> <!-- Description -->
+                <td>
+                    <button class="btn btn-danger btn-sm delete-btn" data-id="{{ image[0] }}">Delete</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        
+    </table>
+    
+</div>
+
+<!-- News Management Section -->
+<div class="section" id="newsManagement">
+    <h3 style="background-color: rgb(65, 63, 62); padding: 20px; color: white;">News Management</h3>
+
+    <form id="newsForm" action="/admin" method="POST" enctype="multipart/form-data">
+        <label>Title:</label>
+        <input type="text" id="newsTitle" name="title" placeholder="Enter title" required style="width: 100%;">
+
+        <label>Description:</label>
+        <textarea id="newsDescription" name="description" placeholder="Enter a short description" required style="width: 100%; height: 80px;"></textarea>
+
+        <label>Content:</label>
+        <textarea id="newsContent" name="content" placeholder="Enter full news content" required style="width: 100%; height: 150px;"></textarea>
+
+        <label>Upload Images (Optional):</label>
+        <input type="file" id="newsImages" name="images" accept="image/*" multiple style="width: 100%;">
+
+        <button type="submit" style="margin-top: 10px;">Upload</button>
+    </form>
+
+    <h3 style="background-color: rgb(65, 63, 62); padding: 20px; color: white;">Manage News</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for news in news_articles %}
+            <tr>
+                <td>{{ news.title }}</td>
+                <td>{{ news.description }}</td>
+                <td>
+                    <button class="delete-news-btn" data-id="{{ news.id }}">Delete</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+            
+            <!-- Registrations Section -->
+            <!-- Event Registrations for Upcoming Events -->
+<div class="section" id="registrations">
+    <h3 style="background-color: rgb(65, 63, 62); padding: 20px; color: white;">Upcoming Event Registrations</h3>
+    <div id="eventRegistrationsContainer"></div>
+</div>
+
+
+                
+                <!-- <input type="text" id="registrationSearch" placeholder="Search users" onkeyup="searchTable('registrationTable', 'registrationSearch')"> -->
+            
+                <button id="exportPDF" class="tab-button">Export Registered Users to PDF</button>
+                <h3 style="background-color: rgb(65, 63, 62); padding: 20px; color: white;">User Registered</h3>
+                <table id="registrationTable">
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Nearest City</th>
+                            <th>Details</th>
+                            <th>Number of Children</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in registrations %}
+                        <tr>
+                            <td>KKA{{ user[0] }}</td> <!-- User ID -->
+                            <td>{{ user[1] }}</td> <!-- Name -->
+                            <td>{{ user[2] }}</td> <!-- Email -->
+                            <td>{{ user[3] }}</td> <!-- Phone -->
+                            <td>{{ user[4] or 'N/A' }}</td> <!-- Nearest City -->
+                            <td>{{ user[5] or 'N/A' }}</td> <!-- Details -->
+                            <td>{{ user[6] or 0 }}</td> <!-- Number of children -->
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Include Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Include jsPDF Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    
+    <script src="{{ url_for('static', filename='scripts/index.js') }}" defer></script>
+    <script type="application/json" id="eventChartData">
+        {{ event_chart_data | tojson }}
+    </script>
+    <script type="application/json" id="eventCityChartData">
+        {{ event_city_chart_data | tojson }}
+    </script>
+    
+    <!-- <script type="application/json" id="eventCityChartData">
+        {{ event_city_chart_data | tojson }}
+    </script> -->
+</body>   
+</html>
