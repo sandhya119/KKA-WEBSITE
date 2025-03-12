@@ -1,5 +1,5 @@
 body {
-    background-color: #fdece4;
+    background-color: #FFD372;
     text-align: center;
     padding: 20px;
 }
@@ -7,15 +7,37 @@ html{
     height: 100%;
     margin: 0;
     padding: 0;
-    background-color: black; /* Unified background */
-    color: white;
+    background-color:#FFD372; /* Unified background */
+    color: #333;
 }
+.team-section{
+    margin-top: 40px;
+}
+.team-member:last-child {
+    margin-bottom: 40px; /* Adds space below the last team member */
+}
+
 .team-section h2 {
     font-size: 28px;
     font-weight: bold;
     margin-bottom: 20px;
 }
-
+.hero p {
+    font-size: 18px;
+    max-width: 700px;
+    margin: 0 auto;
+    color: #004d40; /* Change this to the desired color */
+    font-weight: bold; /* Optional: Makes the text stand out */
+}
+.hero h2 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #004d40;
+}
+.hero{
+background-color:#FFD372;
+  
+}
 .team-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -45,7 +67,8 @@ html{
 
 .team-member p {
     font-size: 14px;
-    color: gray;
+    color: #004d40; /* Change this to the desired color */
+
 }
 
 img {
@@ -69,7 +92,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f9f9f9;
-    color: #333;
+    color: #FFD372;
 }
 
 header {
@@ -82,7 +105,8 @@ header {
 .container {
     max-width: 1000px;  /* Increases container width */
     width: 90%;  /* Makes it responsive */
-    margin: 20px auto;  /* Centers the container */
+    margin: 20px ;  
+    margin-bottom: 40px ;/* Centers the container */
     padding: 30px;  /* Adds spacing inside */
     background: #fff;  /* Ensures good readability */
     border-radius: 10px;  /* Smooth edges */
@@ -102,23 +126,79 @@ h2 {
 }
 
 /* Paragraph (p) */
-.container p { 
-    font-size: 20px;
-    margin-bottom: 25px;  /* Adds spacing between paragraphs */
-    line-height: 1.8;  /* Improves readability */
-    text-align: justify;  /* Makes text alignment cleaner */
-    color: #333;  
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #f8f9fa; /* Light background for elegance */
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.container h2 {
+    font-size: 24px;
+    color: #004d40; /* Change this to the desired color */
+    /* Deep green for a warm cultural touch */
+    text-align: center;
+    margin-bottom: 15px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+}
+
+.container p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    line-height: 1.6;
+    text-align: justify;
+    color: #333;
     font-family: 'Poppins', sans-serif;
 }
 
-.container p1 { 
-    font-size: 20px;
-    margin-bottom: 25px;  /* Adds spacing between paragraphs */
-    line-height: 1.8;  /* Improves readability */
-    text-align: center;  /* Makes text alignment cleaner */
-    color: #333;  
+.container ul {
+    list-style: none;
+    padding: 0;
+}
+
+.container ul li {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #444;
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
     font-family: 'Poppins', sans-serif;
 }
+
+.container ul li::before {
+    content: "•"; /* Bullet point */
+    color: #004d40; /* Change this to the desired color */
+    /* Teal for accent */
+    font-size: 20px;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 2px;
+}
+
+.container p strong {
+    color: #004d40; /* Change this to the desired color */
+    /* Teal accent for emphasis */
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    .container h2 {
+        font-size: 22px;
+    }
+
+    .container p, .container ul li {
+        font-size: 16px;
+    }
+}
+
 
 ul {
     padding-left: 20px; /* Adjust the space between bullets and text */
@@ -150,7 +230,4 @@ li {
     text-align: center; /* Center the text */
     margin-left: auto;
     margin-right: auto;
-}
-.hero p1{
-    height:50px;
 }

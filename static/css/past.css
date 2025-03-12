@@ -49,7 +49,7 @@ custom-navbar {
 }
 
 .past-events h1 {
-    color: white!important;  /* Ensure visibility */
+    color: #004d40!important;  /* Ensure visibility */
     font-size: 2.5rem !important;  
     margin-top: 0 !important;  /* Prevent unwanted spacing */
     padding: 10px;
