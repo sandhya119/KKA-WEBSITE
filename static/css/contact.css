@@ -96,7 +96,7 @@ nav ul li a {
     position: relative;
     width: 100vw; /* Full viewport width */
     height: 100vh; /* Full viewport height */
-    min-height: 900px;
+    min-height: 100px;
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
                 url('/static/images/bck.png') no-repeat center center;
                 background-size: cover;
