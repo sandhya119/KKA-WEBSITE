@@ -138,3 +138,19 @@ li {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhances shadow */
     background: #f9f9f9;  /* Light background change */
 }
+.about-page {
+    background-image: none !important;
+    background-color: white; /* Optional: Set a plain background */
+}
+
+
+.hero {
+    margin-top: -135px; /* Reduce space from navbar */
+    max-width: 700px; /* Adjust width for better readability */
+    text-align: center; /* Center the text */
+    margin-left: auto;
+    margin-right: auto;
+}
+.hero p1{
+    height:50px;
+}

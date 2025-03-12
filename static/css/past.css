@@ -9,7 +9,7 @@ body {
     text-align: center;
     padding: 0.5%;
     line-height: 1.2;
-    color: #e0e0e0; /* Light grey for better readability */
+    color: white; /* Light grey for better readability */
     font-size:4vw;
     padding-top: 100px !important;  /* Create space below the navbar */
 }
@@ -33,7 +33,7 @@ custom-navbar {
 
 /* Past Events Section */
 .past-events {
-    background-color: black !important;
+    background-color:#FFD372 !important;
     padding: 15% 4% !important;  /* Reduce padding */
     min-height: 100vh;
     text-align: center;
@@ -49,7 +49,7 @@ custom-navbar {
 }
 
 .past-events h1 {
-    color: #FFB300 !important;  /* Ensure visibility */
+    color: white!important;  /* Ensure visibility */
     font-size: 2.5rem !important;  
     margin-top: 0 !important;  /* Prevent unwanted spacing */
     padding: 10px;
@@ -80,7 +80,7 @@ custom-navbar {
 
 /* Individual Event Card */
 .event-card {
-    background:#FFB300;
+    background:white;
     padding: 50px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 25px;

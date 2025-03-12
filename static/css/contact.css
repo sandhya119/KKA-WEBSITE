@@ -94,12 +94,13 @@ nav ul li a {
 /* Hero Section - Fixing Image Cropping */
 .hero {
     position: relative;
-    width: 100%;
-    height: 100vh; /* Ensure consistency */
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
     min-height: 900px;
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                url('/static/images/bck.png') no-repeat center 40%;
-    background-size: cover !important;
+                url('/static/images/bck.png') no-repeat center center;
+                background-size: cover;
+                /* Ensures the image stretches to cover both width and height */
     background-attachment: fixed;
     display: flex;
     align-items: center;

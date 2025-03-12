@@ -6,9 +6,16 @@
 
 #mainhead {
     font-family: "Arial", sans-serif;
-    background: url('../images/bg.png') center/cover no-repeat;
+    /* background: url('../images/bg.png') center/cover no-repeat; */
     color: #f4e3cf; /* Soft, neutral text color */
 }
+body {
+    background: url("../images/bg.jpg") !important;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 
 header {
     background: rgba(0, 0, 0,0.8);

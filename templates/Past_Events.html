@@ -45,15 +45,16 @@
 
     <!-- Past Events Section -->
     <section class="events past-events">
+        <script src="{{ url_for('static', filename='js/pastevents.js') }}"></script>
         <div class="heading-box">
             <h1 style="color: #FFB300;">Past Events</h1>
         </div>
-        <p>Experience the joy of unforgettable Konkani gatherings that celebrate culture, tradition, and unity!</p>
+        <p style="color:white;">Experience the joy of unforgettable Konkani gatherings that celebrate culture, tradition, and unity!</p>
         
         <div class="event-list">
             {% if events %}
                 {% for event in events %}
-                <div class="event-card">
+                    <div class="event-card">
                     <img src="{{ url_for('static', filename=event[2]) }}" alt="{{ event[0] }}">
                     <div class="event-details">
                         <h3>{{ event[0] }}</h3>
