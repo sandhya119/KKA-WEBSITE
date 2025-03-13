@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     
     <!-- FontAwesome Icons -->
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
@@ -185,47 +186,32 @@
         {% include 'sponsors.html' %}
     </div>
     <!-- Footer -->
-    <section>
+
+     <section>
         <div class="container1">
             <footer class="footer">
-                <!-- Column 1: Logo & Socials -->
                 <div class="footer-column">
-                    <img src="{{ url_for('static', filename='images/1.png') }}" alt="Karaval Konkans Logo">
-                    <p>Karaval Konkans Australia is a not for profit community organization formed in Octorber 2024 with an intention to unite all Konkani speaking people from Karaval India.</p>
+                    
+                    <p>Karaval Konkans Australia is a not-for-profit community organization formed in October 2024 with an intention to unite all Konkani-speaking people from Karaval India.</p>
                     <div class="social-icons">
-                        <a href="#"><i class="mdi mdi-instagram"></i></a>
-                        <a href="#"><i class="mdi mdi-whatsapp"></i></a>
-                        <a href="#"><i class="mdi mdi-facebook"></i></a>
-                        <a href="#"><i class="mdi mdi-youtube"></i></a>
+                        <a href="#"><i class="fa-brands fa-instagram" style="color: #E4405F;"></i></a>
+                        <a href="#"><i class="fa-brands fa-whatsapp" style="color: #25D366;"></i></a>
+                        <a href="#"><i class="fa-brands fa-facebook" style="color: #1877F2;"></i></a>
+                        <a href="#"><i class="fa-brands fa-youtube" style="color: #FF0000;"></i></a>
                     </div>
                 </div>
-
-                <!-- Column 2: Quick Links -->
-                <div class="footer-column1">
-                    <h3>Quick Links</h3>
-                    <div class="footer-links">
-                        <a href="{{ url_for('home') }}">Home</a>
-                        <a href="{{ url_for('aboutus') }}">About Us</a>
-                        <a href="{{ url_for('news') }}">News</a>
-                        <a href="{{ url_for('contact') }}">Contact Us</a>
-                    </div>
-                </div>
-                
-                <!-- Column 3: Contact Information -->
-                <div class="footer-column2">
-                    <h3>Contact Us</h3>
-                    <p>Email: <a href="mailto:info@karavalkonkans.org.au">info@karavalkonkans.org.au</a></p>
-                    <a href="{{ url_for('contact') }}">Contact Us</a>
+    
+                <div class="footer-column2" id="footer">
+                    <a href="{{ url_for('contact') }}" style="color: white;">Contact Us</a>
+                    <p>Email: <a href="mailto:info@karavalkonkans.org.au" style="color: white;">info@karavalkonkans.org.au</a></p>
                 </div>
 
-                <!-- Copyright -->
                 <div class="copyright">
                     © Karaval Konkans Australia Inc. All rights reserved.
                 </div>
             </footer>
         </div>
     </section>
-
     <!-- Scripts -->
     <script src="{{ url_for('static', filename='scripts/script.js') }}"></script>
     <script src="{{ url_for('static', filename='scripts/header.js') }}"></script>
