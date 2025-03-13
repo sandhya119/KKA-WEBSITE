@@ -1,15 +1,16 @@
-/* General Styles */
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-}
-html{
+html {
     height: 100%;
     margin: 0;
     padding: 0;
     background-color: black; /* Unified background */
-    color: white;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: white; /* Set background to white */
+    color: black; /* Ensure text is visible on a white background */
 }
 
 /* Navbar */
@@ -49,68 +50,30 @@ nav ul li a {
     text-decoration: none;
 }
 
-/* Hero Section */
-/* .hero {
-    position: relative;
-    width: 100%;
-    height: 100vh; 
-    min-height: 800px; 
-    background: url('/static/images/bck.png') no-repeat center center/cover !important;
-    background-attachment: fixed; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: #ffc342;
-    background-size: contain !important;
-    overflow: hidden;
-} */
-/* .hero {
-    background: url('/static/images/bck.png') no-repeat center center/cover !important;
-    background: rgba(0, 0, 0, 0.7); 
-    display: flex;
-    justify-content: center; 
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
-    height: 100vh;
-    color: #ffc342;
-    padding-top: 80px;
-} */
 
-/* .hero{
-    background: url('/static/images/bck.png') no-repeat center center/cover !important; 
-} */
-/* .hero img {
-    width: 100%; 
-    height: auto; 
-    object-fit: contain;
-    max-height: 500px;
-    display: block; 
-    margin: 0 auto; 
-    background: url('/static/images/bck.png') no-repeat center center/cover !important; 
-} */
-/* Hero Section - Ensuring Consistent Image Size */
-/* Hero Section - Fixing Image Cropping */
-.hero {
+ section.hero {
     position: relative;
-    width: 100vw; /* Full viewport width */
-    height: 100vh; /* Full viewport height */
-    min-height: 100px;
+    width: 800px;
+    height: 100vh;
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                url('/static/images/bck.png') no-repeat center center;
-                background-size: cover;
-                /* Ensures the image stretches to cover both width and height */
-    background-attachment: fixed;
+                url("{{ url_for('static', filename='images/bck.png') }}") ;
+    background-size: cover;
+  
     display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+  
     text-align: center;
     color: #ffc342;
-    overflow: hidden;
     padding: 80px 0;
 }
+
+.container {
+    width: 100%;
+    max-width: 100vw;
+    margin: 0;
+    padding: 0;
+}
+
+
 
 
  h1 {
@@ -129,9 +92,7 @@ nav ul li a {
     font-size: 18px;
     color:#ffc342 !important;
 }
-/* .heroic{
-    color:#ffc342 !important;
-} */
+
 
 
 

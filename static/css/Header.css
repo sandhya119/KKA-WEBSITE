@@ -18,7 +18,7 @@ body {
 
 
 header {
-    background: rgba(0, 0, 0,0.8);
+    background:black;
     top:0;
     display: flex;
     padding: 15px;

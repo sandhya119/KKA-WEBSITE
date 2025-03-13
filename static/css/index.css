@@ -9,6 +9,12 @@ body {
     background-color: #ffffff;
     color: black;
 }
+.hero-section {
+    background: url('your-pg.png') no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+}
+
 
 .admin-header {
     display: flex;
