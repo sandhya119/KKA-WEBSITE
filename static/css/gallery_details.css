@@ -1,0 +1,132 @@
+/* Gallery Details Page Styles */
+html, body {
+    font-family: Arial, sans-serif;
+    background-color: #FFD372;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+/* Main Container */
+/* Ensure enough space below the header */
+.gallery-details-container {
+    max-width: 800px;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-top: 80px; /* Adjust margin to push content down */
+}
+/* Title and Description */
+.gallery-details-container h1,
+.gallery-details-container p {
+    color: black;
+    text-align: center;
+    font-size: 18px;
+}
+
+.gallery-details-container h1 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Main Image */
+.gallery-details-container img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Extra Images Section - Same size as Main Image */
+.extra-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+    
+}
+
+.extra-images img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* "More Images" Title */
+.extra-images-title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    color: black;
+    margin-top: 20px;
+    padding: 5px 10px; /* Space inside the border */
+    border: 2px solid black; /* Border around the text */
+    display: inline-block; /* Makes the border fit the text */
+    border-radius: 8px; /* Optional: Rounded edges */
+    background-color: white; /* Optional: Background for contrast */
+}
+
+/* Back Button */
+.back-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background: #f1c40f;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    margin-top: 15px;
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    background: #f1c40f;
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+    .gallery-details-container {
+        max-width: 90%;
+        padding: 15px;
+    }
+
+    .gallery-details-container img {
+        max-height: 300px;
+    }
+
+    .extra-images img {
+        width: 100%;
+        max-height: 300px;
+    }
+}
+
+/* iPhone SE (375px width) Fix */
+@media (max-width: 375px) {
+    .gallery-details-container {
+        margin-top: 100px; /* Increase for smaller screens */
+    }
+
+    .gallery-details-container img,
+    .extra-images img {
+        width: 100%;
+        max-height: 250px; /* Make extra images same size as main */
+    }
+
+    .extra-images-title {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .gallery-details-container p {
+        font-size: 14px;
+    }
+
+    .back-btn {
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+}
