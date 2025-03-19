@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ event.title }}</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; }
+        .container { max-width: 700px; margin: auto; background: white; padding: 20px; border-radius: 8px; }
+        img { width: 100%; border-radius: 8px; }
+        h1 { text-align: center; }
+        .extra-images { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px; }
+        .extra-images img { width: 150px; height: 150px; object-fit: cover; border-radius: 8px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>{{ event.title }}</h1>
+    <img src="{{ url_for('static', filename=event.file_path) }}" alt="{{ event.title }}">
+   
+
+    {% if event.extra_images %}
+    <h2>More Images</h2>
+    <div class="extra-images">
+        {% for img in event.extra_images %}
+            <img src="{{ url_for('static', filename=img) }}" alt="Extra Image">
+        {% endfor %}
+    </div>
+    {% endif %}
+    <p>{{ event.description }}</p>
+    <a href="{{ url_for('gallery') }}" class="btn">Back to Gallery</a>
+</div>
+
+</body>
+</html>

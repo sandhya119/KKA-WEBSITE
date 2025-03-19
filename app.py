@@ -2,6 +2,10 @@ import os
 import sqlite3
 from flask import send_file
 import pandas as pd
+import re
+from datetime import datetime
+from collections import defaultdict
+from PIL import Image
 from fpdf import FPDF
 from flask import jsonify
 from flask import Flask, render_template, request, redirect, url_for, flash, session
@@ -82,10 +86,17 @@ def init_db():
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,
     description TEXT NOT NULL,
-    file_path TEXT NOT NULL
+    file_path TEXT NOT NULL,
+    uploaded_at TEXT NOT NULL
     );
-    
-                     
+                         
+    CREATE TABLE IF NOT EXISTS extra_images (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        event_id INTEGER,
+        file_path TEXT NOT NULL,
+        FOREIGN KEY (event_id) REFERENCES gallery(id) ON DELETE CASCADE
+        );                 
+                   
 
     ''')
 
@@ -96,7 +107,18 @@ def init_db():
         cursor.execute("INSERT INTO admins (email, password) VALUES (?, ?)",
                        ("info@karavalkonkans.org.au", hashed_password))
     conn.commit()
-    conn.close()
+       # Fetch all images from the database
+    cursor.execute("SELECT file_path FROM gallery")
+    images = cursor.fetchall()
+    for img_path in images:
+        full_path = os.path.join(UPLOAD_FOLDER, img_path[0])  # Get full path
+        if os.path.exists(full_path):
+            img = Image.open(full_path)
+            img = img.resize((500, 500))  # Resize to 500x500px
+            img.save(full_path)
+            conn.close()
+            print("✅ All images resized successfully!")
+
 
 init_db()
 
@@ -757,37 +779,135 @@ def aboutus():
 
 
 
-@app.route('/gallery')
+# @app.route('/gallery')
+# def gallery():
+#     conn = sqlite3.connect(DB_PATH)
+#     cursor = conn.cursor()
+    
+#     # Fetch gallery images from the new gallery table
+#     cursor.execute("SELECT id, title, description, file_path FROM gallery")
+#     gallery_images = [dict(id=row[0], title=row[1], description=row[2], file_path=row[3]) for row in cursor.fetchall()]
+    
+#     conn.close()
+#     return render_template('gallery.html', gallery_images=gallery_images)
+
+# @app.route('/upload_gimages', methods=['POST'])
+# def upload_gimages():
+#     if request.method == 'POST':
+#         title = request.form['title']
+#         description = request.form['description']
+#         image = request.files['image']
+
+#         if image and title and description:
+#             image_path = os.path.join(app.config["UPLOAD_FOLDER"], image.filename)
+#             image.save(image_path)
+
+#             conn = sqlite3.connect(DB_PATH)
+#             cursor = conn.cursor()
+#             cursor.execute("INSERT INTO gallery (title, description, file_path) VALUES (?, ?, ?)", 
+#                            (title, description, f"uploads/{image.filename}"))
+#             conn.commit()
+#             conn.close()
+
+#     return redirect(url_for('gallery'))
+@app.route("/gallery")
 def gallery():
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT id, title, description, file_path, 
+               COALESCE(uploaded_at, datetime('now', 'localtime')) 
+        FROM gallery ORDER BY uploaded_at DESC
+    """)
+    images = cursor.fetchall()
     
-    # Fetch gallery images from the new gallery table
-    cursor.execute("SELECT id, title, description, file_path FROM gallery")
-    gallery_images = [dict(id=row[0], title=row[1], description=row[2], file_path=row[3]) for row in cursor.fetchall()]
+    gallery_by_date = {}
+    for image in images:
+        uploaded_at = image[4]
+        date = uploaded_at.split(" ")[0]
+        
+        cursor.execute("SELECT file_path FROM extra_images WHERE event_id = ?", (image[0],))
+        extra_images = [row[0] for row in cursor.fetchall()]
+        
+        if date not in gallery_by_date:
+            gallery_by_date[date] = []
+        
+        gallery_by_date[date].append({
+            "id": image[0],
+            "title": image[1],
+            "description": image[2],
+            "file_path": image[3],
+            "extra_images": extra_images
+        })
     
     conn.close()
-    return render_template('gallery.html', gallery_images=gallery_images)
+    return render_template("gallery.html", gallery_by_date=gallery_by_date)
 
-@app.route('/upload_gimages', methods=['POST'])
+@app.route("/upload_gimages", methods=["POST"])
 def upload_gimages():
-    if request.method == 'POST':
-        title = request.form['title']
-        description = request.form['description']
-        image = request.files['image']
+    title = request.form["title"]
+    description = request.form["description"]
+    # uploaded_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    uploaded_at = request.form.get("uploaded_at") 
+    main_image = request.files["main_image"]
+    extra_images = request.files.getlist("extra_images")
+    
+    # If no date is provided, fallback to current timestamp
+    if not uploaded_at or len(uploaded_at) < 10:
+        uploaded_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    if not main_image:
+        return "Main image is required", 400
+    
+    filename = secure_filename(main_image.filename)
+    main_image_path = os.path.join(app.config["UPLOAD_FOLDER"], filename)
+    main_image.save(main_image_path)
+    
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute("""
+        INSERT INTO gallery (title, description, file_path, uploaded_at) 
+        VALUES (?, ?, ?, ?)
+    """, (title, description, f"uploads/{filename}", uploaded_at))
+    event_id = cursor.lastrowid
+    
+    for image in extra_images[:20]:  # Limit to 20 images
+        if image.filename:
+            extra_filename = secure_filename(image.filename)
+            extra_path = os.path.join(app.config["UPLOAD_FOLDER"], extra_filename)
+            image.save(extra_path)
+            cursor.execute("""
+                INSERT INTO extra_images (event_id, file_path) VALUES (?, ?)
+            """, (event_id, f"uploads/{extra_filename}"))
+    
+    conn.commit()
+    conn.close()
+    return redirect(url_for("gallery"))
 
-        if image and title and description:
-            image_path = os.path.join(app.config["UPLOAD_FOLDER"], image.filename)
-            image.save(image_path)
+@app.route("/gallery_details/<int:event_id>")
+def gallery_details(event_id):
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
 
-            conn = sqlite3.connect(DB_PATH)
-            cursor = conn.cursor()
-            cursor.execute("INSERT INTO gallery (title, description, file_path) VALUES (?, ?, ?)", 
-                           (title, description, f"uploads/{image.filename}"))
-            conn.commit()
-            conn.close()
+    cursor.execute("SELECT title, description, file_path FROM gallery WHERE id = ?", (event_id,))
+    event = cursor.fetchone()
 
-    return redirect(url_for('gallery'))
+    if not event:
+        return "Event not found", 404
+
+    cursor.execute("SELECT file_path FROM extra_images WHERE event_id = ?", (event_id,))
+    extra_images = [row[0] for row in cursor.fetchall()]
+    
+    conn.close()
+
+    return render_template("gallery_details.html", event={
+        "title": event[0],
+        "description": event[1],
+        "file_path": event[2],
+        "extra_images": extra_images
+    })
+
+
 
 # @app.route('/delete_image/<int:image_id>', methods=['POST'])
 # def delete_image(image_id):

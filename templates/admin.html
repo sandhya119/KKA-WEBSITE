@@ -193,18 +193,28 @@
     <h3 style="background-color: rgb(65, 63, 62); padding: 20px; color: white;">Gallery Management</h3>
 
     <div class="gallery-upload">
-        <form id="galleryForm" action="{{ url_for('upload_gimages') }}" method="POST" enctype="multipart/form-data">
-            <label>Title:</label>
-            <input type="text" id="imageTitle" name="title" placeholder="Enter title" required>
+        <!-- Updated admin.html -->
+<form action="{{ url_for('upload_gimages') }}" method="POST" enctype="multipart/form-data">
+    <label for="title">Event Title:</label>
+    <input type="text" id="title" name="title" required>
+    
+    <label for="description">Event Description:</label>
+    <input type="text" id="description" name="description" required>
+    
+    <label for="main_image">Upload Main Image:</label>
+    <input type="file" id="main_image" name="main_image" accept="image/*" required>
+    
+    <label for="extra_images">Upload Additional Images (Max 20):</label>
+    <input type="file" id="extra_images" name="extra_images" accept="image/*" multiple>
+    <br>
+    <label for="uploaded_at">Upload Date:</label>
+<input type="date" name="uploaded_at" required>
 
-            <label>Description:</label>
-            <input type="text" id="imageDescription" name="description" placeholder="Enter Description" required>
 
-            <label>Upload New Image:</label>
-            <input type="file" id="galleryImage" name="image" accept="image/*" required>
+    <br>
+    <button type="submit">Upload Event</button>
+</form>
 
-            <button type="submit">Upload</button>
-        </form>
     </div>
 
     <h3 style="background-color: rgb(65, 63, 62); padding: 20px; color: white;">Manage Gallery</h3>

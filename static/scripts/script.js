@@ -238,3 +238,65 @@ document.addEventListener("DOMContentLoaded", function () {
 //         alert(data.error);
 //     }
 // });
+document.addEventListener("DOMContentLoaded", function () {
+    const thumbnailsWrapper = document.querySelector(".thumbnails-wrapper"); // Visible container
+    const thumbnails = document.querySelector(".thumbnails"); // Scrolling list
+    const leftButton = document.querySelector(".scroll-left");
+    const rightButton = document.querySelector(".scroll-right");
+
+    const thumbnailWidth = document.querySelector(".thumbnail-wrapper").offsetWidth; // Get thumbnail width
+    const gap = 10; // Space between images
+    const visibleImages = 3; // Default to 3 visible images
+    const totalImages = thumbnails.children.length; // Total images
+    const scrollAmount = (thumbnailWidth + gap) * visibleImages; // Move exactly 3 images
+    const maxScroll = (totalImages - visibleImages) * (thumbnailWidth + gap); // Max scroll limit
+
+    function updateGalleryLayout() {
+        const screenWidth = window.innerWidth;
+        
+        if (totalImages <= 2) {
+            // Ensure same size for 1 and 2 images
+            thumbnails.style.display = "flex";
+            thumbnails.style.justifyContent = "center";
+            thumbnailsWrapper.style.overflow = "hidden"; // Disable scrolling
+            leftButton.style.display = "none"; // Hide navigation buttons
+            rightButton.style.display = "none";
+    
+            document.querySelectorAll(".thumbnail-wrapper").forEach(wrapper => {
+                if (screenWidth <= 768) {
+                    wrapper.style.flex = "0 0 80%"; // Mobile: Wider images
+                    wrapper.style.maxWidth = "80%";
+                } else {
+                    wrapper.style.flex = "0 0 calc(33.33% - 10px)"; // Desktop: Keep same size
+                    wrapper.style.maxWidth = "calc(33.33% - 10px)";
+                }
+            });
+    
+        } else {
+            // Default scrolling behavior for 3+ images
+            thumbnails.style.justifyContent = "flex-start";
+            thumbnailsWrapper.style.overflow = "hidden"; // Keep scrolling enabled
+            updateButtons(); // Show/hide navigation buttons
+        }
+    }
+    
+
+    function updateButtons() {
+        leftButton.style.display = thumbnailsWrapper.scrollLeft <= 0 ? "none" : "block";
+        rightButton.style.display = thumbnailsWrapper.scrollLeft >= maxScroll ? "none" : "block";
+    }
+
+    updateGalleryLayout(); // Apply initial layout adjustments
+
+    rightButton.addEventListener("click", () => {
+        thumbnailsWrapper.scrollBy({ left: scrollAmount, behavior: "smooth" });
+        setTimeout(updateButtons, 500);
+    });
+
+    leftButton.addEventListener("click", () => {
+        thumbnailsWrapper.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+        setTimeout(updateButtons, 500);
+    });
+});
+// Call the function on window resize to adapt dynamically
+window.addEventListener("resize", updateGalleryLayout);
