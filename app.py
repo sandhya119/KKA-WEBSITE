@@ -889,10 +889,12 @@ def gallery_details(event_id):
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
 
-    cursor.execute("SELECT title, description, file_path FROM gallery WHERE id = ?", (event_id,))
+    # ✅ Fetch the latest title & description every time the page loads
+    cursor.execute("SELECT id, title, description, file_path FROM gallery WHERE id = ?", (event_id,))
     event = cursor.fetchone()
 
     if not event:
+        conn.close()
         return "Event not found", 404
 
     cursor.execute("SELECT file_path FROM extra_images WHERE event_id = ?", (event_id,))
@@ -901,9 +903,10 @@ def gallery_details(event_id):
     conn.close()
 
     return render_template("gallery_details.html", event={
-        "title": event[0],
-        "description": event[1],
-        "file_path": event[2],
+        "id": event[0],
+        "title": event[1],
+        "description": event[2],
+        "file_path": event[3],
         "extra_images": extra_images
     })
 
@@ -1221,6 +1224,99 @@ def delete_event(event_id):
 
     return jsonify({"success": True, "message": "Event deleted successfully!"})
 
+@app.route("/get_gallery_details/<int:image_id>")
+def get_gallery_details(image_id):
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+
+    # Fetch the gallery image details
+    cursor.execute("SELECT id, title, description FROM gallery WHERE id = ?", (image_id,))
+    gallery = cursor.fetchone()
+
+    if not gallery:
+        conn.close()
+        return jsonify({"success": False, "message": "Image not found!"}), 404
+
+    # Fetch extra images for the gallery
+    cursor.execute("SELECT id, file_path FROM extra_images WHERE event_id = ?", (image_id,))
+    extra_images = [{"id": row[0], "file_path": row[1]} for row in cursor.fetchall()]
+
+    conn.close()
+
+    return jsonify({
+        "success": True,
+        "id": gallery[0],
+        "title": gallery[1],
+        "description": gallery[2],
+        "extra_images": extra_images,
+        "edit_mode": True  # ✅ Fix for add images section
+    })
+
+@app.route('/delete_extra_image/<int:image_id>', methods=['DELETE'])
+def delete_extra_image(image_id):
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+
+    # Get the file path before deleting
+    cursor.execute("SELECT file_path FROM extra_images WHERE id = ?", (image_id,))
+    image_data = cursor.fetchone()
+
+    if image_data:
+        image_path = os.path.join(app.static_folder, image_data[0])
+        if os.path.exists(image_path):
+            os.remove(image_path)  # ✅ Delete the file
+
+        cursor.execute("DELETE FROM extra_images WHERE id = ?", (image_id,))
+        conn.commit()
+        conn.close()
+
+        return jsonify({"success": True, "message": "Image successfully deleted!"})
+
+    conn.close()
+    return jsonify({"success": False, "message": "Image not found!"})
+
+@app.route("/add_gallery_images/<int:event_id>", methods=["POST"])
+def add_gallery_images(event_id):
+    extra_images = request.files.getlist("extra_images")
+
+    if not extra_images:
+        return jsonify({"success": False, "message": "No images uploaded"}), 400
+
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+
+    for image in extra_images:
+        if image.filename:
+            filename = secure_filename(image.filename)
+            filepath = os.path.join(app.config["UPLOAD_FOLDER"], filename)
+            image.save(filepath)
+
+            cursor.execute(
+                "INSERT INTO extra_images (event_id, file_path) VALUES (?, ?)", 
+                (event_id, f"uploads/{filename}")
+            )
+
+    conn.commit()
+    conn.close()
+    
+    return jsonify({"success": True, "message": "Extra images added successfully!"})
+
+@app.route('/edit_gallery_image', methods=['POST'])
+def edit_gallery_image():
+    image_id = request.form.get("image_id")
+    title = request.form.get("title")
+    description = request.form.get("description")
+
+    if not image_id or not title or not description:
+        return jsonify({"success": False, "message": "Missing fields!"})
+
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute("UPDATE gallery SET title = ?, description = ? WHERE id = ?", (title, description, image_id))
+    conn.commit()
+    conn.close()
+
+    return jsonify({"success": True, "message": "Gallery details updated successfully!"})
 
 
 if __name__ == '__main__':

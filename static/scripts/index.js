@@ -368,3 +368,142 @@ function exportUpcomingPDF(eventId) {
         })
         .catch(error => console.error("Error checking event category:", error));
 }
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const editButtons = document.querySelectorAll(".edit-btn");
+    const addImagesButtons = document.querySelectorAll(".add-images-btn");
+    const editGallerySection = document.getElementById("editGallerySection");
+    const addImagesSection = document.getElementById("addImagesSection");
+    const editForm = document.getElementById("editGalleryForm");
+    const extraImagesForm = document.getElementById("addExtraImagesForm");
+    const existingImagesDiv = document.getElementById("existingImages");
+    let deletedImages = false;
+
+    // ✅ Show Edit Modal & Fetch Gallery Details
+    editButtons.forEach(button => {
+        button.addEventListener("click", function () {
+            let imageId = this.dataset.id;
+
+            fetch(`/get_gallery_details/${imageId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById("editImageId").value = data.id;
+                    document.getElementById("editTitle").value = data.title;
+                    document.getElementById("editDescription").value = data.description;
+                    
+                    existingImagesDiv.innerHTML = ""; // Clear old images
+                    deletedImages = false;
+                    
+                    data.extra_images.forEach(img => {
+                        let imgElement = document.createElement("div");
+                        imgElement.innerHTML = `
+                            <img src="/static/${img.file_path}" width="100" height="100">
+                            <button class="delete-img-btn" data-id="${img.id}">❌ Remove</button>
+                        `;
+                        existingImagesDiv.appendChild(imgElement);
+                    });
+
+                    editGallerySection.style.display = "block";  // ✅ Show Edit Section
+                } else {
+                    alert(data.message);
+                }
+            });
+        });
+    });
+
+    // ✅ Submit Edit Form & Handle Updates
+    editForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        
+        let formData = new FormData(editForm);
+
+        fetch("/edit_gallery_image", {
+            method: "POST",
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Server Response:", data);  // ✅ Debugging
+
+            if (data.success) {
+                alert("Successfully saved changes!");  // ✅ Show success message
+                
+                // ✅ Update title and description on the page immediately
+                document.querySelector(".gallery-details-container h1").innerText = data.title;
+                document.querySelector(".gallery-details-container p").innerText = data.description;
+                
+                // Reload after a delay to reflect changes
+                setTimeout(() => {
+                    location.reload();
+                }, 1000);
+            } else {
+                alert("Error: " + data.message);
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
+    });
+
+    // ✅ Delete Images and Update UI
+    existingImagesDiv.addEventListener("click", function (event) {
+        if (event.target.classList.contains("delete-img-btn")) {
+            let imageId = event.target.dataset.id;
+
+            fetch(`/delete_extra_image/${imageId}`, {
+                method: "DELETE"
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    event.target.parentElement.remove();
+                    deletedImages = true;  // ✅ Mark image as deleted
+                } else {
+                    alert(data.message);
+                }
+            });
+        }
+    });
+
+    // ✅ Show Add Images Section
+    addImagesButtons.forEach(button => {
+        button.addEventListener("click", function () {
+            let imageId = this.dataset.id;
+            document.getElementById("extraImageEventId").value = imageId;
+            addImagesSection.style.display = "block";  // ✅ Show Add Images Section
+        });
+    });
+
+    // ✅ Submit Add Images Form
+    extraImagesForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        let formData = new FormData(extraImagesForm);
+        let eventId = document.getElementById("extraImageEventId").value;
+
+        fetch(`/add_gallery_images/${eventId}`, {
+            method: "POST",
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message);
+            location.reload();
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
+    });
+
+    // ✅ Close Modals When Clicking Outside
+    window.onclick = function (event) {
+        if (event.target === editGallerySection) {
+            editGallerySection.style.display = "none";
+        }
+        if (event.target === addImagesSection) {
+            addImagesSection.style.display = "none";
+        }
+    };
+});

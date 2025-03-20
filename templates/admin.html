@@ -233,6 +233,8 @@
                 <td>{{ image[1] }}</td> <!-- Title -->
                 <td>{{ image[2] }}</td> <!-- Description -->
                 <td>
+                    <button class="btn btn-primary btn-sm edit-btn" data-id="{{ image[0] }}">Edit</button>
+                    <button class="btn btn-success btn-sm add-images-btn" data-id="{{ image[0] }}">Add Images</button>
                     <button class="btn btn-danger btn-sm delete-btn" data-id="{{ image[0] }}">Delete</button>
                 </td>
             </tr>
@@ -240,6 +242,34 @@
         </tbody>
         
     </table>
+    <div id="editGallerySection" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3>Edit Gallery Image</h3>
+            <form id="editGalleryForm">
+                <input type="hidden" id="editImageId" name="image_id">
+                <label>Title:</label>
+                <input type="text" id="editTitle" name="title" required>
+                <label>Description:</label>
+                <input type="text" id="editDescription" name="description" required>
+                <h4>Existing Images:</h4>
+                <div id="existingImages"></div>
+                <button type="submit">Save Changes</button>
+            </form>
+        </div>
+    </div>
+    
+    
+    <div id="addImagesSection" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3>Add More Images</h3>
+            <form id="addExtraImagesForm">
+                <input type="hidden" id="extraImageEventId" name="event_id">
+                <label>Upload More Images (Max 20):</label>
+                <input type="file" id="extraImages" name="extra_images" accept="image/*" multiple required>
+                <button type="submit">Upload</button>
+            </form>
+        </div>
+    </div>
     
 </div>
 

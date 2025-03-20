@@ -40,6 +40,7 @@
         <h1>{{ event.title }}</h1>
         <img src="{{ url_for('static', filename=event.file_path) }}" alt="{{ event.title }}">
         <p>{{ event.description }}</p>
+        
         {% if event.extra_images %}
         <h2 class="extra-images-title">More Images</h2>
             <div class="extra-images">
@@ -52,6 +53,9 @@
         
         <a href="{{ url_for('gallery') }}" class="back-btn">Back to Gallery</a>
     </div>
+
+
+    
 
     <div class="sponsors-wrapper">
         {% include 'sponsors.html' %}
