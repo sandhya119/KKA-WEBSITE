@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABOUT US</title>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nheader.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- FontAwesome Icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body class="about-page">
+
+
+
+
+    <!-- Navbar -->
+    <custom-navbar 
+        data-home="{{ url_for('home') }}"
+        data-about="{{ url_for('aboutus') }}"
+        data-news="{{ url_for('news') }}"
+        data-past-events="{{ url_for('past_events') }}"
+        data-upcoming-events="{{ url_for('upcoming_events') }}"
+        data-gallery="{{ url_for('gallery') }}"
+        data-contact="{{ url_for('contact') }}"
+        data-logo="{{ url_for('static', filename='images/logo.png') }}"
+        data-menu-icon="{{ url_for('static', filename='images/hamburger.png') }}"
+        data-authenticated="{{ 'true' if 'user_id' in session else 'false' }}"
+    data-profile="{{ url_for('profile') }}"
+    data-logout="{{ url_for('logout') }}"
+    data-login="{{ url_for('login') }}">
+    </custom-navbar>
+
+    <!-- Main Section -->
+    <section id="mainhead">
+        <div id="popup" class="popup-container" style="display: none;">
+            <div class="popup-content">
+                <p id="poppy">Are you already a part of the family?</p>
+                <button onclick="alreadyMember()">Yes</button>
+                <button onclick="notMember()">No</button>
+                <button class="close-btn" onclick="closePopup()">Close</button>
+            </div>
+        </div>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <h2>ಆಮ್ಚೆ ವಿಶಿಂ</h2>
+            <h2>About Us</h2>
+            <p>Karaval Konkans Australia is a not for profit community organization formed in Octorber 2024 with an intention to unite all Konkani speaking people from Karaval India.</p>
+            <div class="carousel">
+                <div class="active"></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </section>
+    </section>
+    
+    <!-- Team Section -->
+
+<section class="team-section" style="background-color:#FFD372;">
+   
+    <h2 style="color: #004d40;">OUR TEAM</h2>
+    <div class="team-grid">
+        <div class="team-member">
+            <img src="{{ url_for('static', filename='images/I1.jpeg') }}" alt="Wilson D'Souza-Kalakdar">
+            <h3>Wilson D'Souza-Kalakdar</h3>
+            <p>Founder Chairperson</p>
+        </div>
+        <div class="team-member">
+            <img src="{{ url_for('static', filename='images/I2.jpeg') }}" alt="Rev. Fr. Jacob Alvares">
+            <h3>Rev. Fr. Jacob Alvares</h3>
+            <p>Spiritual Director</p>
+        </div>
+        <div class="team-member">
+            <img src="{{ url_for('static', filename='images/I3.jpeg') }}" alt="Jane D'Souza">
+            <h3>Jane D'Souza</h3>
+            <p>President</p>
+        </div>
+        <div class="team-member">
+            <img src="{{ url_for('static', filename='images/I4.jpeg') }}" alt="Roshan Veicker">
+            <h3>Roshan Veicker</h3>
+            <p>Vice President</p>
+        </div>
+        <div class="team-member">
+            <img src="{{ url_for('static', filename='images/I5.jpeg') }}" alt="Caroline D'Souza">
+            <h3>Caroline D'Souza</h3>
+            <p>Secretary</p>
+        </div>
+        <div class="team-member">
+            <img src="{{ url_for('static', filename='images/I6.jpeg') }}" alt="Ashley D'Souza">
+            <h3>Ashley D'Souza</h3>
+            <p>Treasurer</p>
+        </div>
+        <div class="team-member">
+            <img src="{{ url_for('static', filename='images/I7.jpeg') }}" alt="Manoj D'Silva">
+            <h3>Manoj D'Silva</h3>
+            <p>Sports Secretary</p>
+        </div>
+        <div class="team-member">
+            <img src="{{ url_for('static', filename='images/I8.jpeg') }}" alt="Darel Lersado">
+            <h3>Darel Lersado</h3>
+            <p>Media Secretary</p>
+        </div>
+        <div class="team-member">
+            <img src="{{ url_for('static', filename='images/I9.jpeg') }}" alt="Wilson D'Souza">
+            <h3>Wilson D'Souza</h3>
+            <p>Grants Coordinator</p>
+        </div>
+        <div class="team-member">
+            <img src="{{ url_for('static', filename='images/I10.jpeg') }}" alt="Joe Sequeira">
+            <h3>Joe Sequeira</h3>
+            <p>Events & Marketing</p>
+        </div>
+        <div class="team-member">
+            <img src="{{ url_for('static', filename='images/I11.jpeg') }}" alt="Sandria Rodrigues">
+            <h3>Sandria Rodrigues</h3>
+            <p>Music & Performing Arts</p>
+        </div>
+        <div class="team-member">
+            <img src="{{ url_for('static', filename='images/I12.jpeg') }}" alt="Ria Veicker">
+            <h3>Ria Veicker</h3>
+            <p>Youth Engagement</p>
+        </div>
+        <div class="team-member">
+            <img src="{{ url_for('static', filename='images/I13.jpeg') }}" alt="Bonita D'Silva">
+            <h3>Bonita D'Silva</h3>
+            <p>Youth, Talents Coordinator</p>
+        </div>
+    </div>
+</section>
+
+<section class="container">
+    <h2>Karavali Konkans Australia Inc</h2>
+    <p>
+        Karaval Konkans Australia Inc is a newly incorporated association that has taken a bold step to invigorate and preserve the uniqueness of Konkani traditions, culture, and language in the ever-growing Konkani-speaking community as a gift to the coming generations. A dream dreamt by one, a thought shared by many, with a vision to become a movement across Australia united through our language and heritage would be a great way to summarize. It takes a great team to make this dream a reality and bring it to fruition.
+    </p>
+
+    <h2>Who Are We</h2>
+    <p>
+        Karaval Konkans Australia is a not-for-profit community organization formed in October 2024 with the intention of uniting all Konkani-speaking people from Karaval, India. We are a vibrant and inclusive community dedicated to celebrating and preserving the rich cultural heritage, language, and traditions of the Konkani people. Our community is a melting pot of individuals and families who share a common bond through our unique cultural identity and a shared vision for a supportive and connected community.
+    </p>
+
+    <h2>Our Purpose</h2>
+    <p>
+        Our purpose is to foster a sense of belonging and unity among Konkani people in Australia. We aim to support our members through cultural events, educational programs, and community services, ensuring that our heritage is preserved and celebrated for generations to come.
+    </p>
+
+    <h2>Our Vision</h2>
+    <p>
+        Our vision is to build a thriving and cohesive Konkani community in Australia that is recognized for its cultural richness, mutual support, and active contribution to the multicultural fabric of the nation. We envision a future where every member feels valued, connected, and proud of their heritage while also embracing the diverse opportunities and experiences that Australia offers.
+    </p>
+
+    <h2>Our Mission</h2>
+    <p>
+        Our mission is to create a vibrant and inclusive environment that supports our members through various initiatives:
+    </p>
+    <ul>
+        <li><strong>Cultural Preservation:</strong> Organizing festivals, traditional dance and music performances, and culinary events to celebrate our heritage.</li>
+        <li><strong>Community Support:</strong> Providing resources and assistance to new immigrants, students, families, and seniors to help them integrate into Australian society while maintaining their cultural identity.</li>
+        <li><strong>Educational Programs:</strong> Offering language classes, cultural workshops, and educational seminars to enhance knowledge and appreciation of Konkani heritage.</li>
+        <li><strong>Social Engagement:</strong> Creating opportunities for social interaction and community bonding through regular gatherings, sports events, and social activities.</li>
+        <li><strong>Intergenerational Connections:</strong> Facilitating programs that encourage interaction between different generations, fostering mutual respect and understanding.</li>
+        <li><strong>Health and Well-being:</strong> Organizing health camps, wellness workshops, and providing information on healthcare resources.</li>
+        <li><strong>Community Outreach:</strong> Engaging with the broader Australian society through collaborative projects, cultural exchanges, and participation in multicultural events.</li>
+        <li><strong>Volunteerism and Leadership:</strong> Encouraging volunteerism and leadership within our community to foster a sense of responsibility and empowerment.</li>
+        <li><strong>Sustainable Development:</strong> Committing to the sustainable development of our community by adopting environmentally friendly practices and promoting sustainability awareness.</li>
+        <li><strong>Global Connectivity:</strong> Maintaining strong ties with Konkani communities worldwide to share resources, knowledge, and cultural exchanges.</li>
+    </ul>
+
+    <h2>Join Us</h2>
+    <p>
+        We invite you to join our community and be a part of our journey. Whether you are a new immigrant, a long-time resident, or simply interested in learning more about Konkani culture, there is a place for you here. Together, we can create a supportive, vibrant, and culturally rich community that not only preserves our heritage but also contributes positively to the broader Australian society.
+    </p>
+</section>
+
+    <div class="sponsors-wrapper">
+        {% include 'sponsors.html' %}
+    </div>
+    <!-- Footer -->
+
+     <section>
+        <div class="container1">
+            <footer class="footer">
+                <div class="footer-column">
+                    
+                    <p>Karaval Konkans Australia is a not-for-profit community organization formed in October 2024 with an intention to unite all Konkani-speaking people from Karaval India.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fa-brands fa-instagram" style="color: #E4405F;"></i></a>
+                        <a href="#"><i class="fa-brands fa-whatsapp" style="color: #25D366;"></i></a>
+                        <a href="#"><i class="fa-brands fa-facebook" style="color: #1877F2;"></i></a>
+                        <a href="#"><i class="fa-brands fa-youtube" style="color: #FF0000;"></i></a>
+                    </div>
+                </div>
+    
+                <div class="footer-column2" id="footer">
+                    <a href="{{ url_for('contact') }}" style="color: white;">Contact Us</a>
+                    <p>Email: <a href="mailto:info@karavalkonkans.org.au" style="color: white;">info@karavalkonkans.org.au</a></p>
+                </div>
+
+                <div class="copyright">
+                    © Karaval Konkans Australia Inc. All rights reserved.
+                </div>
+            </footer>
+        </div>
+    </section>
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='scripts/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/header.js') }}"></script>
+
+</body>
+</html>

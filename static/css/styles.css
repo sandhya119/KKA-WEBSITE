@@ -1,0 +1,554 @@
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #faf3e0; /* Soft pastel background */
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Registration Container */
+.registration-container {
+    max-width: 420px;
+    width: 100%;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Headings */
+h1 {
+    font-family:'Poppins',sans-serif;
+    text-align: center;
+    color: #ffc342;
+    font-size: 40px;
+    font-weight: 600;
+}
+
+/* Form Labels */
+label {
+    font-weight: 500;
+    text-align: left;
+    color: #333;
+    font-size: 14px;
+}
+
+/* Input Fields & Select */
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    background: #f9f9f9;
+}
+
+/* Radio Button Group */
+/* .dropdown-group{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; Aligns options to the left */
+    /* gap: 8px;
+    margin-bottom: 15px;
+} */
+/* 
+.radio-group label {
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+    gap: 10px; Adds spacing between radio button and label */
+    /* color: #302e2e;
+    font-size: 14px;
+} */
+
+/* Ensure radio buttons align properly */
+/* .radio-group input[type="radio"] {
+    margin: 0;
+} */
+
+/* Description Text (Small Text Below Fields) */
+.description {
+    font-size: 12px;
+    color:#ffc342;
+    margin-top: -5px;
+    margin-bottom: 10px;
+}
+
+/* General Button Style */
+button {
+    background-color:#ffc342;
+    color: white;
+    padding: 12px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.3s ease-in-out;
+    font-family: 'Poppins', sans-serif;
+    margin: 15px 10px 15px;
+    gap: 10px
+}
+
+button:hover {
+    background-color:#ffc342;
+}
+
+/* #popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+} */
+
+/* Ensure Popup is on Top */
+/* Ensure popup stays hidden until triggered */
+#popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: none; /* Ensure it starts hidden */
+    justify-content: center;
+    align-items: center;
+    z-index: 3000;
+}
+
+.popup-content {
+    background: white;
+    color: black;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    width: 80%;
+    max-width: 400px;
+    z-index: 3100;
+}
+
+/* Ensure popup appears correctly when visible */
+.popup-show {
+    display: flex !important; /* Override any hidden styles */
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.crystal-ball {
+    background: radial-gradient(circle, #ff9d4d, #ff9d4d);
+    border-radius: 100%;
+    padding: 50px;
+    color: darkred;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(143, 193, 255, 0.8);
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.extra-links a {
+    color: #ffc342;  /* Set text color */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Make text bold */
+    transition: color 0.3s ease; /* Smooth color transition */
+}
+
+.extra-links a:hover {
+    color: #ffc342; /* Slightly darker shade on hover */
+    text-decoration: underline; /* Underline on hover */
+}
+
+
+#joinBtn {
+    background-color: #ffc342;
+    color: darkred;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s;
+}
+
+#joinBtn:hover {
+    background-color: #ffc342;
+}
+/* login page back-button */
+.back-home {
+    text-align: center;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.back-home button {
+    background-color: #ffc342;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: block;  /* Ensures it's below */
+    margin: 10px auto; /* Centers it */
+}
+
+.back-home button:hover {
+    background-color: #ffc342;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    /* Adjust form container */
+    .registration-container {
+        width: 80%;
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+
+    /* Buttons and Inputs */
+    button, input, select, textarea {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .crystal-ball {
+        font-size: 1rem;
+        padding: 40px;
+    }
+
+    .extra-links a {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 600px) {
+    .registration-container {
+        width: 90%;
+        padding: 15px;
+    }
+
+    /* Adjust heading size */
+    h1 {
+        font-size: 28px;
+    }
+
+    /* Adjust button sizes */
+    button, #joinBtn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    /* Form fields */
+    input, select, textarea {
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    /* Popup adjustments */
+    .popup-content {
+        padding: 30px;
+        width: 90%;
+    }
+
+    .crystal-ball {
+        font-size: 1rem;
+        padding: 40px;
+    }
+
+    /* Buttons */
+    .button-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/* Form Widths */
+#registerForm,
+#loginForm,
+#forgotPasswordForm,
+#resetPasswordForm {
+    width: 100%;
+}
+
+/* Dashboard Container */
+.dashboard-container {
+    width: 900px; /* Fixed width for the dashboard */
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin: 0 auto; /* Center the container */
+}
+@media (max-width: 900px) {
+    .dashboard-container {
+        width: 80%;
+        padding: 15px;
+    }
+}
+/* Family Member Entry */
+.member-entry {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.member-entry input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    flex: 1;
+}
+
+.remove-btn {
+    background-color:#ffc342;
+    color: white;
+    border: none;
+    padding: 6px 10px; /* Reduced padding */
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px; /* Slightly smaller font */
+    width: auto; /* Adjust width based on content */
+    min-width: 60px; /* Ensure it's not too small */
+    text-align: center;
+}
+
+.remove-btn:hover {
+    background-color: #ff4d4d;
+}
+
+/* Popup Container */
+.popup-container {
+    width: 900px; /* Set the width of the container */
+    margin: 0 auto; /* Center the container horizontally */
+    padding: 20px;
+    text-align: center;
+}
+@media (max-width: 900px) {
+    .popup-container {
+        width: 80%;
+    }
+}
+
+/* Popup Style */
+/* Popup Container */
+.popup-container {
+    position: fixed; /* Keep it on top */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Dark overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000; /* Higher than other elements */
+}
+
+/* Popup Content */
+.popup-content {
+    background: white;
+    color: black;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 80%;
+    max-width: 400px;
+}
+
+/* Button Group */
+
+.button-group {
+    display: flex;
+    justify-content: space-between; /* Ensures even spacing */
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    gap: 15px; /* Adds space between buttons */
+}
+button[onclick="addMember()"] {
+    width: 150px; /* Adjust width as needed */
+    padding: 8px 10px; /* Adjust padding for better appearance */
+    font-size: 14px; /* Optional: Adjust font size */
+    margin-bottom: 15px;
+}
+.mandatory {
+    color: red; /* This makes the asterisk red */
+}
+
+/* Style for the text box */
+.text-box {
+    
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.text-box h2 {
+    color: #ff9d4d;
+    font-size: 35px;
+    font-weight:bolder;
+    margin: 0;
+}
+
+.login-container {
+    max-width: 50%;
+    width: 50%;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    justify-content: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#loginSubmit{
+    width:100px;
+    margin-top:35px;
+    margin: 35px auto 0 auto;
+    display: block;
+
+}
+
+.form-container{
+    max-width: 100%;
+    width: 100%;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+
+#registerForm{
+    width:100%;
+    padding-left:10px;
+}
+
+#registerSubmit{
+    width:200px;
+    margin-left:170px;
+    margin-top:35px;
+
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color:#ffc342;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: #ffc342;
+}
+/* Responsive Styles for forms */
+@media (max-width: 600px) {
+    .login-container, .form-container {
+        padding: 20px;
+    }
+
+    #registerSubmit {
+        width: 100%;
+        margin: 0;
+    }
+
+    #loginSubmit {
+        width: 100%;
+        margin: 0;
+    }
+}
+/* .sponsors {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #f8f8f8;
+}
+
+.sponsors h2 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.sponsors-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.sponsor img {
+    max-width: 150px;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.sponsor img:hover {
+    transform: scale(1.1);
+} */
+ 
+.sponsor-container {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.sponsor-wrapper {
+    display: flex;
+    animation: scroll 10s linear infinite;
+}
+
+.sponsor-wrapper img {
+    width: 150px; /* Adjust as needed */
+    height: 150px; /* Keep it square */
+    object-fit: contain; /* Ensures the entire logo fits */
+    margin: 10px;
+}
+
+@keyframes scroll {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}

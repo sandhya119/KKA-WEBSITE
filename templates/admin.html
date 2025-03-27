@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <style>
+    #editdescription {
+        width: 100%;
+        height: 200px;
+        font-size: 16px;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        resize: vertical;
+    }
+</style>
+
+</head>
+<body>
+
+    <header class="admin-header">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/1.png') }}" alt="Admin Logo">
+        </div>
+        <div class="admin-panel">
+            <img src="{{ url_for('static', filename='images/profile.webp') }}" alt="Admin Avatar" class="profile-img">
+            <span>Admin Panel</span>
+        </div>
+    </header>
+
+
+
+    <div class="container">
+        <div class="sidebar">
+            <!-- <button class="tab-button" onclick="showSection('adminProfile')">Admin Profile</button>
+            <button class="tab-button" onclick="showSection('Dashboard')">Dashboard</button>
+            <button class="tab-button" onclick="showSection('Content Management')">Content Management</button> -->
+            <!-- <button class="tab-button" onclick="showSection('userLogin')">User Login Details</button> -->
+            <!-- <button class="tab-button" onclick="showSection('registrations')">Registrations</button> -->
+            <button class="tab-button" onclick="scrollToSection('adminProfile')">Admin Profile</button>
+<!-- <button class="tab-button" onclick="scrollToSection('Dashboard')">Dashboard</button> -->
+<button class="tab-button" onclick="scrollToSection('Content Management')">Content Management</button>
+<button class="tab-button" onclick="scrollToSection('upcomingEvents')">Upcoming Events Management</button>
+<button class="tab-button" onclick="scrollToSection('pastEvents')">Past Events Management</button>
+<button class="tab-button" onclick="scrollToSection('galleryManagement')">Gallery Management</button>
+<button class="tab-button" onclick="scrollToSection('newsManagement')">News Management</button>
+<button class="tab-button" onclick="scrollToSection('registrations')">Registrations</button>
+
+
+            
+        </div>
+
+        <div class="main-content">
+            <!-- Admin Profile Section -->
+            <div class="section" id="adminProfile">
+                <h3 class="profile-header">Admin Profile</h3>
+                <div class="profile-card">
+                    <div class="profile-avatar">
+                        <img src="{{ url_for('static', filename='images/profile.webp') }}" alt="Admin Avatar" class="avatar-img">
+
+                    </div>
+                    <div class="profile-info">
+                        <!-- <p><strong>Name:</strong> Admin Name</p> -->
+                        <p><strong>Email:</strong> info@karavalkonkans.org.au</p>
+                        <p><strong>Role:</strong> Administrator</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Section -->  
+            <!-- <div class="section" id="Dashboard">
+                <h3 style="background-color: rgb(65, 63, 62); padding: 20px; color: white;">Dashboard</h3>
+                <div class="analytics-summary"> -->
+                    <!-- <div class="analytics-card"> -->
+                        <!-- <h4>Total Logins</h4>
+                        <p id="totalLogins">0</p>  -->
+                    <!-- </div> -->
+                    <!-- <div class="analytics-card">
+                        <h4>Total Registrations</h4>
+                        <p id="totalUsers">{{ total_users }}</p>
+                    </div> -->
+                    <!-- <div class="analytics-card">
+                        <h4>Total Event Registrations</h4>
+                        <p id="totalEventRegistrations">{{ total_event_registrations }}</p> 
+                    </div> -->
+                <!-- </div>
+
+                <h3 style="margin-top: 20px;">Event-wise Registrations</h3>
+<table class="event-registrations-table">
+    <thead>
+        <tr>
+            <th>Event Name</th>
+            <th>Number of People Registered</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for event, count in event_chart_data %}
+        <tr>
+            <td>{{ event }}</td>
+            <td>{{ count }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+                <div class="chart-container">
+                    <h3>Event Registrations</h3>
+                    <canvas id="eventChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>Event Registrations by City</h3>
+                    <canvas id="eventCityChart"></canvas>
+                </div>
+                
+            </div> -->
+
+            <!--content uploading-->
+            <div class="section" id="Content Management">
+                <h3 style="background-color: rgb(65, 63, 62); padding: 20px; color: white;">Upload Content of Upcoming Events</h3>
+            
+                <div class="content-upload">
+                    <form action="{{ url_for('upload_event') }}" method="POST" enctype="multipart/form-data">
+                        <label for="title">Title:</label>
+                        <input type="text" id="title" name="title" required>
+                    
+                        <!-- <label for="description">Event Description:</label>
+                        <input type="text" id="description" name="description" required> -->
+                        <label for="editdescription">Event Description:</label>
+<textarea id="editdescription" name="description" rows="8" cols="80" placeholder="Enter event description" required></textarea>
+
+                    
+                        <label for="category">Category:</label>
+                        <input type="hidden" name="category" value="upcoming"> <!-- Always store as "Upcoming Event" -->
+
+                    
+                        <label for="date">Event Date:</label>
+                        <input type="date" id="date" name="date" required>
+                    
+                        <label for="time">Event Time:</label>
+                        <input type="time" id="time" name="time" required>
+
+                         <!-- NEW: Publish From Date Field -->
+            <label for="publish_date_from">Publish From:</label>
+            <input type="date" id="publish_date_from" name="publish_date_from" required>
+
+                    
+                        <label for="cutoff_date">Cutoff Date:</label>
+                        <input type="date" id="cutoff_date" name="cutoff_date" required>
+                        <br>
+                    
+                        <label for="guest_limit">Guest Limit:</label>
+                        <input type="number" id="guest_limit" name="guest_limit" min="1" required>
+                        <br>
+                    
+                        <label for="main_image">Main Image:</label>
+                        <input type="file" id="main_image" name="main_image" accept="image/*" required>
+                    
+                        <label for="extra_images">Upload Additional Images (Max 20):</label>
+                        <input type="file" id="extra_images" name="extra_images" accept="image/*" multiple>
+                    <br>
+                        <button type="submit">Upload Event</button>
+                    </form>
+
+                    <!-- Past Events Content Upload -->
+<!-- Past Events Content Upload -->
+<!-- Past Events Content Upload -->
+<div class="content-upload">
+    <h3 style="background-color: rgb(65, 63, 62); padding: 20px; color: white;">Upload Content of Past Event</h3>
+
+    <form id="pastContentForm" action="{{ url_for('upload_past_content') }}" method="POST" enctype="multipart/form-data">
+        <label>Title:</label>
+        <input type="text" name="title" required>
+
+        <!-- <label>Description:</label>
+        <input type="text" name="description" required> -->
+        <label for="editdescription">Event Description:</label>
+<textarea id="editdescription" name="description" rows="8" cols="80" placeholder="Enter event description" required></textarea>
+
+        <input type="hidden" name="category" value="past">  <!-- Set category as "past" -->
+
+        <label>Upload Multiple Images (Max 20):</label>
+        <input type="file" name="extra_images" accept="image/*" multiple required>
+
+        <button type="submit">Upload</button>
+    </form>
+</div>
+
+
+                    </div>
+
+<!-- Upcoming Events Management -->
+<!-- <div class="section" id="upcomingEvents">
+    <h3 style="background-color: rgb(65, 63, 62); padding: 20px; color: white;">Manage Upcoming Events</h3> -->
+<!-- Upcoming Events Management -->
+<div class="section" id="upcomingEvents">
+    <h3 style="background-color: rgb(65, 63, 62); padding: 20px; color: white;">Manage Upcoming Events</h3>
+
+    <h2>Upcoming Events</h2>
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Publish Date</th>
+                <th>Cut-off Date</th>
+                <th>Guest Limit</th>
+                <th>Date & Time</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- {% set today = current_date.strftime('%Y-%m-%d') %} -->
+            {% for event in upcoming_events %}
+<tr>
+    <td>{{ event.title }}</td>
+    <td>{{ event.description }}</td>
+    <td><img src="{{ url_for('static', filename=event.file_path) }}" width="100"></td>
+    
+    <td>{{ event.publish_date_from or "Not Provided" }}</td>
+    <td>{{ event.cutoff_date if event.cutoff_date else "Not Provided" }}</td>
+    <td>{{ event.guest_limit }}</td>
+    <td>{{ event.date }} | {{ event.time }}</td>
+    <td>
+        <button class="btn btn-primary btn-sm edit-event-btn"
+    data-event-id="{{ event.event_id }}"
+    data-title="{{ event.title|e }}"
+    data-description="{{ event.description|e }}"
+    data-publish-date="{{ event.publish_date_from if event.publish_date_from else '' }}"
+    data-cutoff-date="{{ event.cutoff_date if event.cutoff_date else '' }}"
+    data-guest-limit="{{ event.guest_limit if event.guest_limit else '' }}"
+    data-event-date="{{ event.date if event.date else '' }}"
+    data-event-time="{{ event.time if event.time else '' }}">
+    Edit
+</button>
+
+
+        <button class="btn btn-danger btn-sm" onclick="deleteEvent('{{ event.event_id }}')">
+            Delete
+        </button>
+    </td>
+</tr>
+{% endfor %}
+
+        
+        </tbody>
+    </table>
+    <!-- Edit Event Modal -->
+<!-- Edit Event Modal -->
+<div id="editEventModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <h3>Edit Event</h3>
+        <form id="editEventForm" enctype="multipart/form-data">
+            <input type="hidden" id="editEventId">
+
+            <label>Title:</label>
+            <input type="text" id="editTitle" required>
+
+            <label>Description:</label>
+            <input type="text" id="editDescription" required>
+
+            <label>Publish Date:</label>
+            <input type="date" id="editPublishDate" required>
+
+            <label>Cut-off Date:</label>
+            <input type="date" id="editCutoffDate" required>
+
+            <label>Guest Limit:</label>
+            <input type="number" id="editGuestLimit" min="1" required>
+
+            <label>Event Date:</label>
+            <input type="date" id="editEventDate" required>
+
+            <label>Event Time:</label>
+            <input type="time" id="editEventTime" required>
+
+            <label>Update Main Image:</label>
+            <input type="file" id="editMainImage" name="main_image" accept="image/*">
+
+            <button type="button" onclick="updateEvent()">Save Changes</button>
+            <button type="button" onclick="closeEditModal()">Cancel</button>
+        </form>
+    </div>
+</div>
+
+
+
+</div>
+
+<!-- Display Past Events -->
+<!-- Display Past Events -->
+<div class="section" id="pastEvents">
+    <h3 style="background-color: rgb(65, 63, 62); padding: 20px; color: white;">Manage Past Events</h3>
+
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Images</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in past_events %}
+            <tr>
+                <td>{{ event.title }}</td>
+                <td>{{ event.description }}</td>
+                <td>
+                    {% if event.extra_images %}
+                        {% for img in event.extra_images.split(',') %}
+                            <img src="{{ url_for('static', filename=img.strip()) }}" width="100">
+                        {% endfor %}
+                    {% else %}
+                        No images uploaded
+                    {% endif %}
+                </td>
+                <td>
+                    <button class="btn btn-danger btn-sm" onclick="deleteEvent('{{ event.id }}')">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+
+            
+<!-- Gallery Management Section -->
+<div class="section" id="galleryManagement">
+    <h3 style="background-color: rgb(65, 63, 62); padding: 20px; color: white;">Gallery Management</h3>
+
+    <div class="gallery-upload">
+        <!-- Updated admin.html -->
+<form action="{{ url_for('upload_gimages') }}" method="POST" enctype="multipart/form-data">
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title" required>
+    
+    <!-- <label for="description">Description:</label>
+    <input type="text" id="description" name="description" required> -->
+    <label for="editdescription">Description:</label>
+<textarea id="editdescription" name="description" rows="8" cols="80" placeholder="Enter event description" required></textarea>
+
+    
+    <label for="main_image">Upload Main Image:</label>
+    <input type="file" id="main_image" name="main_image" accept="image/*" required>
+    
+    <label for="extra_images">Upload Additional Images (Max 20):</label>
+    <input type="file" id="extra_images" name="extra_images" accept="image/*" multiple>
+    <br>
+    <label for="uploaded_at">Upload Date:</label>
+<input type="date" name="uploaded_at" required>
+
+
+    <br>
+    <button type="submit">Upload Event</button>
+</form>
+
+    </div>
+
+    <h3 style="background-color: rgb(65, 63, 62); padding: 20px; color: white;">Manage Gallery</h3>
+    <h2>Gallery Images</h2>
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Images</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for image in gallery_images %}
+            <tr>
+                <td>{{ image.title }}</td> <!-- Title -->
+                <td>{{ image.description }}</td> <!-- Description -->
+                <td>
+                    <!-- Main Image -->
+                    <img src="{{ url_for('static', filename=image.file_path) }}" width="100">
+                    
+                    <!-- Display Extra Images (if available) -->
+                    {% if image.extra_images %}
+                        {% for img in image.extra_images.split(',') %}
+                            <img src="{{ url_for('static', filename=img.strip()) }}" width="50">
+                        {% endfor %}
+                    {% endif %}
+                </td>
+                <td>
+                    <button class="btn btn-primary btn-sm edit-btn" data-id="{{ image.id }}">Edit</button>
+                    <button class="btn btn-success btn-sm add-images-btn" data-id="{{ image.id }}">Add Images</button>
+                    <button class="btn btn-danger btn-sm delete-btn" data-id="{{ image.id }}">Delete</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    
+    <!-- Edit Gallery Image Modal -->
+    <div id="editGallerySection" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3>Edit Gallery Image</h3>
+            <form id="editGalleryForm">
+                <input type="hidden" id="editImageId" name="image_id">
+                <label>Title:</label>
+                <input type="text" id="editTitle" name="title" required>
+                <label>Description:</label>
+                <input type="text" id="editDescription" name="description" required>
+                <h4>Existing Images:</h4>
+                <div id="existingImages"></div>
+                <button type="submit">Save Changes</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Add More Images Modal -->
+    <div id="addImagesSection" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3>Add More Images</h3>
+            <form id="addExtraImagesForm">
+                <input type="hidden" id="extraImageEventId" name="event_id">
+                <label>Upload More Images (Max 20):</label>
+                <input type="file" id="extraImages" name="extra_images" accept="image/*" multiple required>
+                <button type="submit">Upload</button>
+            </form>
+        </div>
+    </div>
+    
+
+<!-- News Management Section -->
+<!-- News Management Section -->
+<div class="section" id="newsManagement">
+    <h3 style="background-color: rgb(65, 63, 62); padding: 20px; color: white;">News Management</h3>
+
+    <!-- News Upload Form -->
+    <form id="newsForm" action="{{ url_for('admin_panel') }}" method="POST" enctype="multipart/form-data">
+        <label>Title:</label>
+        <input type="text" id="newsTitle" name="title" placeholder="Enter title" required style="width: 100%;">
+        
+        <label>Description:</label>
+        <textarea id="newsDescription" name="description" placeholder="Enter a short description" required style="width: 100%; height: 80px;"></textarea>
+        
+        <label>Content:</label>
+        <textarea id="newsContent" name="content" placeholder="Enter full news content" required style="width: 100%; height: 150px;"></textarea>
+        
+        <label>Upload Images (Optional):</label>
+        <input type="file" id="newsImages" name="images" accept="image/*" multiple style="width: 100%;">
+        
+        <button type="submit" style="margin-top: 10px;">Upload News</button>
+    </form>
+
+    <!-- Display Uploaded News -->
+    <h3 style="background-color: rgb(65, 63, 62); padding: 20px; color: white;">Manage News</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Images</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for news in news_articles %}
+            <tr>
+                <td>{{ news.title }}</td>
+                <td>{{ news.description }}</td>
+                <td>
+                    {% if news.images %}
+                        {% for img in news.images %}
+                            <img src="{{ url_for('static', filename='uploads/' ~ img) }}" alt="{{ news.title }}" width="50">
+                        {% endfor %}
+                    {% else %}
+                        No images
+                    {% endif %}
+                </td>
+                <td>
+                    <button class="delete-news-btn" data-id="{{ news.id }}">Delete</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+            
+            <!-- Registrations Section -->
+            <!-- Event Registrations for Upcoming Events -->
+<div class="section" id="registrations">
+    <h3 style="background-color: rgb(65, 63, 62); padding: 20px; color: white;">Upcoming Event Registrations</h3>
+    <div id="eventRegistrationsContainer"></div>
+</div>
+
+
+                
+                <!-- <input type="text" id="registrationSearch" placeholder="Search users" onkeyup="searchTable('registrationTable', 'registrationSearch')"> -->
+            
+                <button id="exportPDF" class="tab-button">Export Registered Users to PDF</button>
+
+                <h3 style="background-color: rgb(65, 63, 62); padding: 20px; color: white;">User Registered</h3>
+                
+                <table id="registrationTable" class="table table-striped table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>User ID</th>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Nearest City</th>
+                            <th>Details</th>
+                            <th>Number of Children</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in registrations %}
+                        <tr>
+                            <td>KKA{{ user.user_id }}</td> <!-- User ID -->
+                            <td>{{ user.name }}</td> <!-- Name -->
+                            <td>{{ user.email }}</td> <!-- Email -->
+                            <td>{{ user.phone }}</td> <!-- Phone -->
+                            <td>{{ user.nearest_city or 'N/A' }}</td> <!-- Nearest City -->
+                            <td>{{ user.details or 'N/A' }}</td> <!-- Details -->
+                            <td>{{ user.num_children or 0 }}</td> <!-- Number of Children -->
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                
+                <!-- Include Chart.js -->
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                
+                <!-- Include jsPDF Library -->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+                
+                <!-- Load external JavaScript -->
+                <script src="{{ url_for('static', filename='scripts/index.js') }}" defer></script>
+                
+                <script type="application/json" id="eventChartData">
+                    {{ event_chart_data | tojson }}
+                </script>
+                
+                <script type="application/json" id="eventCityChartData">
+                    {{ event_city_chart_data | tojson }}
+                </script>
+                <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    console.log("✅ JavaScript Loaded!");
+                
+                    document.body.addEventListener("click", function (event) {
+                        if (event.target.classList.contains("edit-event-btn")) {
+                            console.log("✏️ Edit button clicked!", event.target);
+                
+                            let eventId = event.target.getAttribute("data-event-id");
+                            let title = event.target.getAttribute("data-title");
+                            let description = event.target.getAttribute("data-description");
+                            let publishDate = event.target.getAttribute("data-publish-date") || "";
+                            let cutoffDate = event.target.getAttribute("data-cutoff-date") || "";
+                            let guestLimit = event.target.getAttribute("data-guest-limit") || "";
+                            let eventDate = event.target.getAttribute("data-event-date") || "";
+                            let eventTime = event.target.getAttribute("data-event-time") || "";
+                
+                            console.log("📌 Event Data:", { eventId, title, description, publishDate, cutoffDate, guestLimit, eventDate, eventTime });
+                
+                            let modalElements = {
+                                editEventId: document.getElementById("editEventId"),
+                                editTitle: document.getElementById("editTitle"),
+                                editDescription: document.getElementById("editDescription"),
+                                editPublishDate: document.getElementById("editPublishDate"),
+                                editCutoffDate: document.getElementById("editCutoffDate"),
+                                editGuestLimit: document.getElementById("editGuestLimit"),
+                                editEventDate: document.getElementById("editEventDate"),
+                                editEventTime: document.getElementById("editEventTime")
+                            };
+                
+                            if (Object.values(modalElements).every(el => el !== null)) {
+                                modalElements.editEventId.value = eventId;
+                                modalElements.editTitle.value = title;
+                                modalElements.editDescription.value = description;
+                                modalElements.editPublishDate.value = publishDate;
+                                modalElements.editCutoffDate.value = cutoffDate;
+                                modalElements.editGuestLimit.value = guestLimit;
+                                modalElements.editEventDate.value = eventDate;
+                                modalElements.editEventTime.value = eventTime;
+                
+                                document.getElementById("editEventModal").style.display = "block";
+                            } else {
+                                console.error("❌ Some modal elements are missing!");
+                            }
+                        }
+                    });
+                });
+                
+                // Function to close the edit modal
+                function closeEditModal() {
+                    document.getElementById("editEventModal").style.display = "none";
+                }
+                
+                // Function to update the event
+                function updateEvent() {
+                    let eventId = document.getElementById("editEventId").value;
+                    let title = document.getElementById("editTitle").value;
+                    let description = document.getElementById("editDescription").value;
+                    let publishDate = document.getElementById("editPublishDate").value;
+                    let cutoffDate = document.getElementById("editCutoffDate").value;
+                    let guestLimit = document.getElementById("editGuestLimit").value;
+                    let eventDate = document.getElementById("editEventDate").value;
+                    let eventTime = document.getElementById("editEventTime").value;
+                
+                    // Validate inputs
+                    if (!title || !description || !guestLimit) {
+                        alert("Please fill in all required fields.");
+                        return;
+                    }
+                
+                    console.log("🔄 Updating event:", { eventId, title, description, publishDate, cutoffDate, guestLimit, eventDate, eventTime });
+                
+                    fetch("/update-event", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            event_id: eventId,
+                            title: title,
+                            description: description,
+                            publish_date_from: publishDate || null,
+                            cutoff_date: cutoffDate || null,
+                            guest_limit: guestLimit || null,
+                            date: eventDate || null,
+                            time: eventTime || null
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        alert(data.message);
+                        location.reload();
+                    })
+                    .catch(error => {
+                        console.error("❌ Error updating event:", error);
+                        alert("There was an error updating the event.");
+                    });
+                }
+                document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("editdescription").addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault(); // Prevent form submission
+            this.value += "\n"; // Add a new line instead
+        }
+    });
+});
+
+            </script>
+                
+                </body>
+                </html>
+                

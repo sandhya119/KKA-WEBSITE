@@ -1,0 +1,169 @@
+/* Background color for the entire page */
+.profile-page {
+    background-color: #FFD372;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Profile Container */
+.profile-container {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 90%; /* Adjust width for responsiveness */
+    max-width: 450px; /* Prevents it from getting too large */
+    text-align: center;
+}
+
+/* Heading */
+.profile-container h2 {
+    margin-bottom: 20px;
+    color: #004d40;
+    font-size: 24px;
+    text-transform: uppercase;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+/* Form styling */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+}
+
+/* Button styling */
+button {
+    background: #FFB300;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    transition: background 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background: #FFB300;
+    transform: scale(1.05);
+}
+
+/* Registered events styling */
+h3 {
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+#eventList {
+    list-style-type: none;
+    padding: 0;
+}
+
+#eventList li {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 5px;
+    display: block !important;
+    color: black !important;
+    font-size: 14px;
+}
+
+/* Back to home link */
+.back-link {
+    display: inline-block;
+    margin-top: 15px;
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+label {
+    display: block !important;
+    color: black !important;
+    font-weight: bold;
+}
+
+p {
+    display: block !important;
+    color: black !important;
+    font-size: 16px;
+}
+
+/* ---------------- RESPONSIVE STYLING ---------------- */
+
+/* Tablets */
+@media (max-width: 768px) {
+    .profile-container {
+        padding: 20px;
+        max-width: 400px;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+        font-size: 13px;
+        padding: 8px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+
+/* Mobile Devices */
+@media (max-width: 480px) {
+    .profile-container {
+        width: 100%;
+        max-width: 350px;
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    .form-group label {
+        font-size: 14px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    #eventList li {
+        font-size: 12px;
+        padding: 8px;
+    }
+}

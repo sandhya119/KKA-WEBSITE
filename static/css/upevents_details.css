@@ -1,0 +1,333 @@
+/* General Styles */
+/* Fix header overlapping content */
+#mainhead {
+    margin-top: 80px; /* Adjust according to header height */
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Container */
+/* Make Container Smaller & Add Bottom Padding */
+.container {
+    width: 85%; /* Reduced from 90% */
+    max-width: 900px; /* Previously 1000px */
+    overflow: hidden;
+    margin: auto;
+    padding: 20px;
+    background: white;
+    border-radius: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); */
+    box-shadow: none;
+    padding-bottom: 1px; /* Added extra space so it doesn’t touch sponsors */
+}
+/* Fix the container spacing issue */
+.event-container {
+    padding-bottom: 50px; /* Adds space below the button */
+}
+
+/* Event Section */
+.events {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.event-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #004d40;
+}
+
+.event-subtext {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+/* Event Cards */
+.event {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.event:hover {
+    transform: scale(1.02);
+}
+
+/* Event Images */
+.event img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
+/* Event Details Section */
+.event-details {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.event-details h1 {
+    font-size: 28px;
+    color: #004d40;
+    margin-bottom: 10px;
+}
+
+.event-details p {
+    font-size: 18px;
+    color: #555;
+    margin: 5px 0;
+}
+/* Fix Button Alignment and Spacing */
+.event-buttons {
+    display: flex;
+    justify-content: center; /* Ensures buttons stay in one row */
+    align-items: center; /* Centers buttons vertically */
+    gap: 15px; /* Space between buttons */
+    margin-top: 25px; /* Adjust spacing above */
+    margin-bottom: 50px; /* Ensure space between container and buttons */
+    flex-wrap: wrap; /* Prevents overlap on small screens */
+    margin: 20px auto 40px auto; /* Centering with auto */
+}
+
+/* Main Event Image */
+.main-image {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+}
+/* Make Extra Images Same Size as Main Image */
+.extra-images {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.extra-images img {
+    width: 100%;
+    max-width: 600px; /* Same size as main image */
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
+.extra-images img:hover {
+    transform: scale(1.1);
+}
+
+/* Event Text */
+.event h3 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #00796b;
+    margin-top: 10px;
+}
+
+.event p {
+    font-size: 16px;
+    margin: 10px 0;
+    color: #555;
+}
+
+/* Fixing Button Alignment */
+/* .event-buttons {
+    display: flex;
+    justify-content: center; /* Centers buttons 
+    align-items: center; /* Aligns them vertically 
+    gap: 15px; /* Space between buttons 
+    margin-top: 20px; /* Space above buttons 
+    margin-bottom: 40px; /* Space below buttons to avoid touching the container 
+} */
+
+.find-out-more-btn, .register-btn {
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+}
+
+.find-out-more-btn {
+    background-color: #ffc342;
+    color: white;
+}
+
+.find-out-more-btn:hover {
+    background-color: #f57c00;
+    transform: scale(1.05);
+}
+
+/* Register Button */
+/* .register-btn {
+    display: inline-block;
+    padding: 12px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    background-color: #ffc342;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 20px;
+    min-width: 150px;
+}
+
+.register-btn:hover {
+    background-color: #f57c00;
+    transform: scale(1.05);
+} */
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .container {
+        width: 95%;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+    
+    .event-details h1 {
+        font-size: 24px;
+    }
+    
+    .event-details p {
+        font-size: 16px;
+    }
+    
+    .main-image {
+        max-width: 100%;
+    }
+    
+    .register-btn {
+        width: 100%;
+        padding: 14px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .event-details h1 {
+        font-size: 20px;
+    }
+    
+    .event-details p {
+        font-size: 14px;
+    }
+    
+    .register-btn {
+        font-size: 16px;
+        padding: 12px;
+    }
+}
+/* Back Button */
+/* .back-btn {
+    display: inline-block;
+    margin-bottom: 15px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    background-color: #ffc342;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.back-btn:hover {
+    background-color: #f57c00;
+    transform: scale(1.05);
+} */
+/* Adjust Back Button Style */
+/* .back-btn {
+    display: inline-block;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    background-color: #ffc342;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    min-width: 150px;
+}
+
+.back-btn:hover {
+    background-color: #f57c00;
+    transform: scale(1.05);
+} */
+/* Style for Buttons */
+.back-btn, .register-btn {
+    display: inline-block;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    background-color: #ffc342;
+    color: white;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    min-width: 150px; /* Ensure buttons have the same width */
+}
+
+/* Hover Effect */
+.back-btn:hover, .register-btn:hover {
+    background-color: #f57c00;
+    color: white;
+
+    transform: scale(1.05);
+}
+@media (max-width: 600px) {
+    .event-buttons {
+        flex-direction: column; /* Stack buttons on small screens */
+        gap: 10px; /* Reduce space for smaller screens */
+    }
+
+    .back-btn, .register-btn {
+        width: 100%; /* Full width on mobile */
+    }
+}
+.event-container, .event-details {
+    margin-bottom: 0;
+}
+/* Apply margin fix only for mobile screens */
+@media screen and (max-width: 768px) {
+    #mainhead {
+        margin-top: 50px; /* Adjust as needed to prevent overlap */
+    }
+    
+    .container {
+        padding-top: 100px; /* Adjust based on your header height */
+    }
+}

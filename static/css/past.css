@@ -1,0 +1,315 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family:fantasy;
+    background-color: black; /* Light yellow background */
+    text-align: center;
+    padding: 0.5%;
+    line-height: 1.2;
+    color: white; /* Light grey for better readability */
+    font-size:4vw;
+    padding-top: 100px !important;  /* Create space below the navbar */
+}
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+}
+
+/* Remove unwanted space above navbar */
+custom-navbar {
+    display: block;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    background-color: black !important;
+    height: 80px; /* Ensure proper height */
+}
+
+/* Past Events Section */
+.past-events {
+    background-color:#FFD372 !important;
+    padding: 15% 4% !important;  /* Reduce padding */
+    min-height: 100vh;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    transition: background 0.3s ease-in-out;
+}
+/* When popup is active, make the past events background lighter */
+.past-events.blur-background {
+    background-color: rgba(0, 0, 0, 0.8) !important; /* Light black effect */
+    filter: blur(3px); /* Slight blur effect */
+    pointer-events: none; /* Disable interactions */
+}
+
+.past-events h1 {
+    color: #004d40!important;  /* Ensure visibility */
+    font-size: 2.5rem !important;  
+    margin-top: 0 !important;  /* Prevent unwanted spacing */
+    padding: 10px;
+    position: relative;
+    z-index: 1001 !important;
+    display: block !important;
+    text-align: center;
+}
+
+
+.past-events p {
+    max-width: 100%;
+    margin: 0 auto 20px;
+    /* font-size: clamp(0.5rem, 0.5vw, 1.1rem); */
+    line-height: 1.2;
+    font-size: 1.5rem;
+
+}
+
+
+/* Event List - Display Events in Vertical Order */
+.event-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+}
+
+/* Individual Event Card */
+.event-card {
+    background:white;
+    padding: 50px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 25px;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.event-card img {
+    width: 250px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 20px;
+    padding: 10px;
+    transition: transform 0.3s ease;
+
+}
+
+.event-details {
+    text-align: left;
+    flex: 1;
+    font-family:sans-serif;
+}
+
+.event-details h3 {
+    color: #000000;
+    margin-bottom: 2px;
+    font-size: clamp(1.2rem, 1.5vw, 1.8rem);
+    font-family: "Arial", sans-serif; /* Change to a cleaner font */
+    font-weight: bold;
+    font-size: 1.8rem; /* Adjust size for better readability */
+}
+
+.event-details p {
+    font-size: clamp(1rem, 1.3vw, 1.5rem);
+    line-height: 1.2;
+    margin-bottom: 2px;
+    margin-top: 4px;
+    font-family: "Verdana", sans-serif;
+    font-size: 1.2rem;
+    font-weight: normal;
+    color: #444; /* A softer black for better contrast */
+}
+
+.event-card:hover {
+    transform: scale(1.05); /* Slightly enlarges the card */
+    box-shadow: 0 8px 16px rgba(255, 4, 4, 0.2); /* Increases shadow on hover */
+}
+
+/* Button */
+.event-card .btn {
+    display: inline-block;
+    background-color: #FFB300;
+    color:rgb(219, 10, 10);
+    padding: 12px 18px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: clamp(0.9rem, 1vw, 1rem);
+    transition: background-color 0.3s ease;
+}
+
+.event-card .btn:hover {
+    background-color: #ff7633;
+}
+.footer-column2 a {
+    font-size: 0.9rem; /* Adjust as needed */
+}
+.footer {
+    background-color: black !important;
+    padding: 20px 0;
+    color: white !important;
+    width: 100%;
+    text-align: center;
+}
+
+/* Ensure other sections don’t introduce unwanted background */
+section {
+    background-color: black !important;
+}
+
+
+/* .footer {
+    margin-top: auto; 
+    padding: 20px 0;
+} */
+
+/* custom-navbar {
+    display: block;
+    position: relative;
+    z-index: 1000;
+} */
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .heading-box {
+        padding: 24px 200px;
+        font-size: 35px;
+    }
+
+    .event-card {
+        width: 70%;
+    }
+
+    /* .past-events h1 {
+        font-size: 3.5rem;
+    }
+
+    .past-events p {
+        font-size: 1rem;
+    } */
+}
+
+
+@media (max-width: 768px) {
+    .heading-box {
+        padding: 24px 20px;
+        font-size: 30px;
+    }
+
+    .event-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        width: 70%;
+        padding: 10px;
+    }
+
+    .event-card img {
+        width: 100%;
+        height: auto;
+    }
+
+    .event-details h3 {
+        font-size: 1.5rem;
+    }
+
+    .event-details p {
+        font-size: 1rem;
+    }
+
+    .event-card .btn {
+        font-size: 1rem;
+        padding: 12px 16px;
+    }
+    /* .past-events h1 {
+        font-size: 2.5rem;
+    }
+
+    .past-events p {
+        font-size: 1rem;
+    } */
+}
+
+@media (max-width: 480px) {
+    .event-card {
+        width: 70;
+        padding: 20px;
+        border-radius: 30px;
+    }
+
+    .event-card img {
+        border-radius: 20px;
+    }
+
+    .event-details h3 {
+        font-size: 1.2rem;
+    }
+
+    .event-details p {
+        font-size: 1rem;
+    }
+
+    .event-card .btn {
+        font-size: 1rem;
+        padding: 10px 14px;
+    }
+    /* .past-events h1 {
+        font-size: 2rem;
+    }
+
+    .past-events p {
+        font-size: 1rem;
+    } */
+}
+@media (max-width: 768px) {
+    .past-events {
+        padding-top: 20% !important;  /* Adjust spacing */
+    }
+
+    .past-events h1 {
+        font-size: 2rem !important;
+        margin-top: 20px !important;  
+        display: block !important;
+        color: #FFB300 !important;
+    }
+
+    .past-events p {
+        font-size: 1.2rem !important;
+        display: block !important;
+    }
+}
+
+/* @media (max-width: 480px) {
+    .heading-box {
+        padding: 24px 15px;
+        font-size: 24px;
+    }
+
+    .event-card {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .event-card img {
+        width: 100%;
+        height: auto;
+    }
+
+    .event-details h3 {
+        font-size: 1rem;
+    }
+
+    .event-details p {
+        font-size: 0.9rem;
+    }
+
+    .event-card .btn {
+        font-size: 1rem;
+        padding: 12px 20px;
+    }
+} */

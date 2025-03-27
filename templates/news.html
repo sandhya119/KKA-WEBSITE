@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEWS</title>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nheader.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/news.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    
+    <!-- FontAwesome Icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <custom-navbar 
+        data-home="{{ url_for('home') }}"
+        data-about="{{ url_for('aboutus') }}"
+        data-news="{{ url_for('news') }}"
+        data-past-events="{{ url_for('past_events') }}"
+        data-upcoming-events="{{ url_for('upcoming_events') }}"
+        data-gallery="{{ url_for('gallery') }}"
+        data-contact="{{ url_for('contact') }}"
+        data-logo="{{ url_for('static', filename='images/logo.png') }}"
+        data-menu-icon="{{ url_for('static', filename='images/hamburger.png') }}"
+        data-authenticated="{{ 'true' if 'user_id' in session else 'false' }}"
+    data-profile="{{ url_for('profile') }}"
+    data-logout="{{ url_for('logout') }}"
+    data-login="{{ url_for('login') }}">
+    </custom-navbar>
+
+    <!-- Main Section -->
+    <section id="mainhead">
+        <div id="popup" class="popup-container" style="display: none;">
+            <div class="popup-content">
+                <p id="poppy">Are you already a part of the family?</p>
+                <button onclick="alreadyMember()">Yes</button>
+                <button onclick="notMember()">No</button>
+                <button class="close-btn" onclick="closePopup()">Close</button>
+            </div>
+        </div>
+
+        <!-- Hero Section -->
+        <section class="hero" style="background-image: url('/static/images/bck.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+            <h2>ಖಬ್ರೊ</h2>
+            <h2>News</h2>
+            <p1>Karaval Konkans Australia is a not for profit community organization formed in Octorber 2024 with an intention to unite all Konkani speaking people from Karaval India.</p1>
+            <div class="carousel">
+                <div class="active"></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </section>
+    </section>
+    
+    <body>
+     <h1>LATEST NEWS</h1>
+        <div class="main-wrapper">
+            <div class="news-container">
+                {% for news_item in news %}
+                <div class="news-item">
+                    <h2>{{ news_item['title'] }}</h2>
+                    <p>{{ news_item['description'] }}</p>
+                    
+                    <img src="{{ url_for('static', filename='uploads/' + news_item['images'][0]) }}" width="300">
+        
+                    <br>
+                    <a href="{{ url_for('news_details', news_id=news_item['id']) }}" class="read-more-btn">Read More</a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <div class="sponsors-wrapper">
+            {% include 'sponsors.html' %}
+        </div>
+    <!-- Footer -->
+     <!-- Footer -->
+     <section>
+        <div class="container1">
+            <footer class="footer">
+                <div class="footer-column">
+                    
+                    <p>Karaval Konkans Australia is a not-for-profit community organization formed in October 2024 with an intention to unite all Konkani-speaking people from Karaval India.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fa-brands fa-instagram" style="color: #E4405F;"></i></a>
+                        <a href="#"><i class="fa-brands fa-whatsapp" style="color: #25D366;"></i></a>
+                        <a href="#"><i class="fa-brands fa-facebook" style="color: #1877F2;"></i></a>
+                        <a href="#"><i class="fa-brands fa-youtube" style="color: #FF0000;"></i></a>
+                    </div>
+                </div>
+    
+                <div class="footer-column2" id="footer">
+                    <a href="{{ url_for('contact') }}" style="color: white;">Contact Us</a>
+                    <p>Email: <a href="mailto:info@karavalkonkans.org.au" style="color: white;">info@karavalkonkans.org.au</a></p>
+                </div>
+
+                <div class="copyright">
+                    © Karaval Konkans Australia Inc. All rights reserved.
+                </div>
+            </footer>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='scripts/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/header.js') }}"></script>
+
+</body>
+</html>

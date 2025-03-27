@@ -1,0 +1,305 @@
+/* General Styling */
+body {
+    /* font-family: 'Poppins', sans-serif; */
+    font-family:fantasy;
+    background-color: #000000; /* Light yellow background */
+    color: #fff9f9;
+    text-align: center;
+    padding: 30px;
+    line-height: 1.6;
+    font-size: clamp(16px, 2vw, 20px);
+}
+body, html {
+    background-color: #000000 !important;  /* Full black background */
+    color: white !important;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: fantasy;
+    text-align: center;
+    line-height: 1.6;
+    font-size: clamp(16px, 2vw, 20px);
+}
+
+
+/* Container Styling */
+.container {
+    max-width: 100%;
+    margin: auto;
+    padding: 40px 20px;
+    background-color:#FFD372;
+    box-sizing: border-box;
+
+}
+
+/* Headings */
+h2 {
+    margin-bottom: 20px;
+    color:white;
+    margin: auto;
+    font-weight: bolder;
+    font-size: xx-large;
+}
+
+h3 {
+    font-size: 24px;
+    color: black;
+    margin-bottom: 10px;  /* Adds spacing */
+}
+.event-info p strong {
+    color: black !important; /* Apply color only to "Description:" */
+    margin-bottom: 10px;  /* Adds spacing */
+}
+.event-info p {
+    color: black !important; /* Dark grey for entire description text */
+    margin-bottom: 10px;  /* Adds spacing */}
+
+
+.search-bar {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.search-bar input {
+    padding: 12px;
+    width: 70%;
+    border: 2px solid #f4c45d;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+/* Event Cards */
+.event {
+    display: flex;
+    align-items: center;  /* Align image and text in the same line */
+    gap: 20px;  /* Space between image and text */
+    padding: 40px;
+    margin: 40px auto;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 80%;
+    max-width: 1100px;
+    color: black;
+    flex-direction: row; /* Keep items in a row (image + text side by side) */
+}
+
+.event:hover {
+    transform: scale(1.05);
+    box-shadow: #000000;
+}
+
+.event img {
+    max-width: 200px; /* Adjust size */
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Event Title */
+.event-title {
+    color: #ff9d00;
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: bold;
+    margin-bottom: 20px;
+    /* background-color: transparent;
+    padding: 0;*/
+    /* box-shadow:#630404; */
+}
+
+/* Event Info */
+/* Ensure event text is aligned properly */
+.event-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-grow: 1; /* Allows text to take available space */
+    text-align: left;
+}
+
+/* Event Language - Konkani */
+.event-language {
+    font-size: 16px;
+    color: #ffc342;
+    font-weight: bold;
+    margin-bottom: 10px; /* Space after language */
+    text-align: left;
+}
+
+/* Event Location */
+.event-location {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px; /* Space after location */
+    text-align: left;
+}
+
+/* Event Date */
+.event-date {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px; /* Space after date */
+    text-align: left;
+}
+/* Register Button - Align to the right */
+.register-btn {
+    align-self: flex-end; /* Align to the right */
+    margin-top: 15px;
+    background-color: #733105;
+    color: white;
+    padding: 12px 25px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: 0.3s, transform 0.2s;
+}
+
+
+/* On Hover */
+.register-btn:hover {
+    background-color: #db4002;
+    color: white;
+    transform: scale(1.05);
+}
+
+/* Modal Styling for Image */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: #000000;
+    animation: fadeIn 0.3s ease-in-out;
+}
+.event h3, .event p {
+    display: block;  /* Ensures they appear on separate lines */
+    margin-bottom: 10px;  /* Adds spacing */
+}
+
+.modal-content {
+    margin: 50px auto; /* Add space above and below the image */
+    display: block;
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+/* Close Button */
+.close {
+    position: absolute;
+    top: 20px; /* Adjust top positioning for space above */
+    right: 40px;
+    color: white;
+    font-size: 45px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.register-btn {
+    display: inline-block;
+    background-color: #ffc342;
+    color: #ffffff;
+    padding: 10px 15px;
+    margin-top: 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.register-btn:hover {
+    background-color: #f57c00;
+    color: white;
+}
+
+/* MOBILE (WIDTH < 768px) */
+@media (max-width: 768px) {
+    h2 {
+        font-size: 2rem;
+        margin-top: 14px;
+    }
+
+    .search-bar input {
+        width: 80%;
+    }
+
+    .event {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .event img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .event-info {
+        text-align: center;
+    }
+
+    .register-btn {
+        width: 100%;
+        padding: 12px;
+    }
+}
+
+/* SMALL MOBILE (WIDTH < 480px) */
+@media (max-width: 480px) {
+    h2 {
+        font-size: 20px;
+    }
+
+    .event-title {
+        font-size: 26px;
+    }
+
+    .event img {
+        max-width: 150px;
+    }
+
+    .register-btn {
+        font-size: 14px;
+        padding: 10px 20px;
+    }
+
+    .modal-content {
+        max-width: 80%;
+    }
+}
+
+/* KEYFRAME ANIMATION */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+.find-out-more-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-align: center;
+    color: white;
+    background-color: #ffc342; /* Change to desired button color */
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s;
+    font-weight: bold;
+}
+
+.find-out-more-btn:hover {
+    background-color: #f57c00; /* Darker shade on hover */
+}

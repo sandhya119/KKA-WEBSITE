@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/registration.css') }}">
+</head>
+<body>
+
+    <div class="wrapper">
+        <div class="form-container">
+            <div class="text-box">
+                <h2>Join Our Family</h2>
+            </div>
+            <form id="registerForm" method="POST" action="/register">
+
+                <label for="name">Name: <span class="mandatory">*</span></label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email Address: <span class="mandatory">*</span></label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="password">Create Password: <span class="mandatory">*</span></label>
+                <input type="password" id="password" name="password" required>
+
+                <label class="required">Nearest Capital City:</label>
+                <div class="dropdown-group">
+                    <select id="city" name="city" required>
+                        <option value="" disabled selected>Select a city</option>
+                        <option value="Adelaide">Adelaide</option>
+                        <option value="Brisbane">Brisbane</option>
+                        <option value="Canberra">Canberra</option>
+                        <option value="Darwin">Darwin</option>
+                        <option value="Perth">Perth</option>
+                        <option value="Melbourne">Melbourne</option>
+                        <option value="Sydney">Sydney</option>
+                        <option value="Hobart">Hobart</option>
+                    </select>
+                </div>
+
+                <label for="phone">Phone Number: <span class="mandatory">*</span></label>
+                <input type="text" id="phone" name="phone" required>
+
+                <label for="additional_phone">Additional Phone Number:</label>
+                <input type="text" id="additional_phone" name="additional_phone">
+
+                <label for="family_details">Enter details about your family:</label>
+                <textarea id="family_details" name="family_details" rows="3"></textarea>
+
+                <label for="children_count">How many children (under 18) in your family?</label>
+                <input type="number" id="children_count" name="children_count">
+
+                <label for="interests">Brief interests you or a family member wish to participate in:</label>
+                <textarea id="interests" name="interests" rows="3"></textarea>
+
+                <label>Family Members:</label>
+                <div id="familyMembersContainer"></div>
+                <button type="button" onclick="addMember()">Add Member</button>
+
+                <button type="submit" id="registerSubmit">Register</button>
+
+                <p>Already a member? <a href="{{ url_for('login') }}">Login here</a></p>
+                
+            </form>
+            <div class="back-home">
+                <a href="{{ url_for('home') }}">
+                    <button type="button">← Back to Home</button>
+                </a>
+            </div>
+        </div>
+        
+
+        <!-- Footer with Back to Home Button -->
+        <!-- Back to Home button BELOW the form -->
+
+    <script src="{{ url_for('static', filename='scripts/script.js') }}"></script>
+
+</body>
+</html>

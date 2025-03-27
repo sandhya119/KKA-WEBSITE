@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upcoming Konkani Events in Australia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/upevents.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nheader.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+        <!-- FontAwesome Icons -->
+        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+        <!-- Navbar -->
+        <custom-navbar 
+        data-home="{{ url_for('home') }}"
+        data-about="{{ url_for('aboutus') }}"
+        data-news="{{ url_for('news') }}"
+        data-past-events="{{ url_for('past_events') }}"
+        data-upcoming-events="{{ url_for('upcoming_events') }}"
+        data-gallery="{{ url_for('gallery') }}"
+        data-contact="{{ url_for('contact') }}"
+        data-logo="{{ url_for('static', filename='images/logo.png') }}"
+        data-menu-icon="{{ url_for('static', filename='images/hamburger.png') }}"
+        data-authenticated="{{ 'true' if 'user_id' in session else 'false' }}"
+    data-profile="{{ url_for('profile') }}"
+    data-logout="{{ url_for('logout') }}"
+    data-login="{{ url_for('login') }}">
+    </custom-navbar>
+
+    <!-- Main Section -->
+    <section id="mainhead">
+        <div id="popup" class="popup-container" style="display: none;">
+            <div class="popup-content">
+                <p id="poppy">Are you already a part of the family?</p>
+                <button onclick="alreadyMember()">Yes</button>
+                <button onclick="notMember()">No</button>
+                <button class="close-btn" onclick="closePopup()">Close</button>
+            </div>
+        </div>
+        <section class="events past-events">
+            <div class="container">
+                <div class="event-banner">
+                    <h2 style="font-size: xx-large; color:#004d40;" class="event-title">Upcoming Events</h2>
+                </div>
+                <p class="event-subtext" style="color:#004d40">🎉 Dive into Konkani Culture!</p>
+            
+                <!-- Search Bar -->
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Search for events..." onkeyup="searchEvents()">
+                </div>
+            
+                {% if events %}
+                {% for event in events %}
+    <div class="event">
+        <img src="{{ url_for('static', filename=event.file_path) }}" alt="{{ event.title }}">
+
+        <div class="event-info">
+            <h3><strong>Title:</strong> {{ event.title }}</h3>
+            <p><strong>Description:</strong> {{ event.description[:50] }}{% if event.description|length > 50 %}...{% endif %}</p>
+            <p><strong>Date:</strong> {{ event.date }} | <strong>Time:</strong> {{ event.time }}</p>
+
+            {% if event.status %}
+                <p style="color: red;"><strong>{{ event.status }}</strong></p>
+            {% endif %}
+
+            <div class="event-buttons">
+                <a href="{{ url_for('event_details', event_id=event.event_id) }}" class="find-out-more-btn">
+                    Find Out More
+                </a>
+
+                {% if event.show_register_button %}
+                    <a href="{{ url_for('event_register', event_id=event.event_id) }}" class="register-btn">
+                        Register Now
+                    </a>
+                {% else %}
+                    <p class="closed-message">⚠️ Deadline for registration has closed.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+
+            {% else %}
+                <p style="text-align: center; font-size: 20px; color: white;">No upcoming events.</p>
+            {% endif %}
+                                               
+                
+    <!-- Image Modal -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImg">
+    </div>
+</section>
+    <div class="sponsors-wrapper">
+        {% include 'sponsors.html' %}
+    </div>
+<!-- Footer -->
+ <!-- Footer -->
+ <section>
+    <div class="container1">
+        <footer class="footer">
+            <div class="footer-column">
+                
+                <p>Karaval Konkans Australia is a not-for-profit community organization formed in October 2024 with an intention to unite all Konkani-speaking people from Karaval India.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-instagram" style="color: #E4405F;"></i></a>
+                    <a href="#"><i class="fa-brands fa-whatsapp" style="color: #25D366;"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook" style="color: #1877F2;"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube" style="color: #FF0000;"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-column2" id="footer">
+                <a href="{{ url_for('contact') }}" style="color: white;">Contact Us</a>
+                <p>Email: <a href="mailto:info@karavalkonkans.org.au" style="color: white;">info@karavalkonkans.org.au</a></p>
+            </div>
+
+            <div class="copyright">
+                © Karaval Konkans Australia Inc. All rights reserved.
+            </div>
+        </footer>
+    </div>
+</section>
+<!-- Scripts -->
+<script src="{{ url_for('static', filename='scripts/script.js') }}"></script>
+<script src="{{ url_for('static', filename='scripts/header.js') }}"></script>
+<script src="../scripts/upevents.js"></script>
+
+
+</body>
+</html>

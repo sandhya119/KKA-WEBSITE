@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Past Events</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/past.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nheader.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/news.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- FontAwesome Icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <custom-navbar 
+        data-home="{{ url_for('home') }}"
+        data-about="{{ url_for('aboutus') }}"
+        data-news="{{ url_for('news') }}"
+        data-past-events="{{ url_for('past_events') }}"
+        data-upcoming-events="{{ url_for('upcoming_events') }}"
+        data-gallery="{{ url_for('gallery') }}"
+        data-contact="{{ url_for('contact') }}"
+        data-logo="{{ url_for('static', filename='images/logo.png') }}"
+        data-menu-icon="{{ url_for('static', filename='images/hamburger.png') }}"
+        data-authenticated="{{ 'true' if 'user_id' in session else 'false' }}"
+    data-profile="{{ url_for('profile') }}"
+    data-logout="{{ url_for('logout') }}"
+    data-login="{{ url_for('login') }}">
+    </custom-navbar>
+
+    <!-- Main Section -->
+    <section id="mainhead">
+        <div id="popup" class="popup-container" style="display: none;">
+            <div class="popup-content">
+                <p id="poppy">Are you already a part of the family?</p>
+                <button onclick="alreadyMember()">Yes</button>
+                <button onclick="notMember()">No</button>
+                <button class="close-btn" onclick="closePopup()">Close</button>
+            </div>
+        </div>
+
+    <!-- Past Events Section -->
+    <!-- Past Events Section -->
+    <section class="events past-events"> 
+        <script src="{{ url_for('static', filename='js/pastevents.js') }}"></script>
+        
+        <div class="heading-box">
+            <h1>Past Events</h1>
+        </div>
+        
+        <p style="color:#004d40;">
+            Experience the joy of unforgettable Konkani gatherings that celebrate culture, tradition, and unity!
+        </p>
+        
+        <div class="event-list">
+            {% if events %}
+                {% for event in events %}
+                    <div class="event-card">
+                        <img src="{{ url_for('static', filename=event.main_image) }}" alt="{{ event.title }}">
+                        
+                        <div class="event-details">
+                            <h3>{{ event.title }}</h3>
+                            <p><strong>Description:</strong> {{ event.description }}</p>
+                            
+                            {% if event.extra_images %}
+                                <div class="extra-images">
+                                    {% for img in event.extra_images %}
+                                        <img src="{{ url_for('static', filename=img.strip()) }}" width="100">
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No past events available.</p>
+            {% endif %}
+        </div>
+    </section>
+    
+
+    <div class="sponsors-wrapper">
+        {% include 'sponsors.html' %}
+    </div>
+ <!-- Footer -->
+ <section>
+    <div class="container1">
+        <footer class="footer">
+            <div class="footer-column">
+                
+                <p>Karaval Konkans Australia is a not-for-profit community organization formed in October 2024 with an intention to unite all Konkani-speaking people from Karaval India.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-instagram" style="color: #E4405F;"></i></a>
+                    <a href="#"><i class="fa-brands fa-whatsapp" style="color: #25D366;"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook" style="color: #1877F2;"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube" style="color: #FF0000;"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-column2" id="footer">
+                <a href="{{ url_for('contact') }}" style="color: white;">Contact Us</a>
+                <p>Email: <a href="mailto:info@karavalkonkans.org.au" style="color: white;">info@karavalkonkans.org.au</a></p>
+            </div>
+
+            <div class="copyright">
+                © Karaval Konkans Australia Inc. All rights reserved.
+            </div>
+        </footer>
+    </div>
+</section>
+
+<!-- Scripts -->
+<script src="{{ url_for('static', filename='scripts/script.js') }}"></script>
+<script src="{{ url_for('static', filename='scripts/header.js') }}"></script>
+
+</body>
+</html>

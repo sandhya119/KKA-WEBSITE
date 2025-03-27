@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ news['title'] }}{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/newsdetails.css') }}">
+
+<div class="news-details-container">
+    <h1 class="news-title">{{ news['title'] }}</h1>
+
+    {% if images %}
+    <div class="image-gallery">
+        <h3>Gallery</h3>
+        {% for image in images %}
+            <img src="{{ url_for('static', filename='uploads/' + image['image_filename']) }}" alt="News Image">
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="news-content">
+        <p>{{ news['content'] }}</p>
+    </div>
+
+    <a href="{{ url_for('news') }}" class="back-btn">← Back to News</a>
+</div>
+{% endblock %}

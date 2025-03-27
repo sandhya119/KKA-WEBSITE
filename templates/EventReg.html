@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Registration</title>
+    <script src="{{ url_for('static', filename='scripts/EventReg.js') }}" defer></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/EventReg.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+</head>
+<body>
+    <div class="container">
+        <h2 id="eventName">{{ event_title }}</h2>
+
+        <form id="registrationForm" method="POST" action="{{ url_for('event_register', event_id=event_id) }}">
+
+
+            <!-- <input type="hidden" id="eventInput" name="event_id" value="{{ event_id }}"> -->
+            <input type="hidden" name="event_id" value="{{ event_id }}">
+
+            <div class="form-group">
+                <!-- <h2 id="eventName">{{ event_title }}</h2> -->
+
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+
+            <div class="form-group">
+                <label for="people">Total Number of People:</label>
+                <input type="number" id="people" name="people" min="1" required oninput="updateSubsections()">
+            </div>
+
+            <div id="subsections" style="display:none;">
+                <div class="form-group">
+                    <label for="adults">Number of Adults <span style="color: red;">*</span></label>
+                    <input type="number" id="adults" name="adults" min="1" required oninput="validatePeople()">
+                </div>
+
+                <div class="form-group">
+                    <label for="children">Number of Children</label>
+                    <input type="number" id="children" name="children" min="0" oninput="validatePeople()">
+                </div>
+            </div>
+
+            <!-- <button type="submit">Register</button> -->
+            <button type="submit" id="submit-btn">Register</button>
+
+        </form>
+
+    </div>
+    
+    
+    <div id="thankYouMessage" style="display:none; text-align: center;" data-home-url="{{ url_for('home') }}">
+        <h2>Thank you for registering!</h2>
+        <p>Check out other exciting events.</p>
+    </div>
+    
+    
+    <div id="overlay" style="display:none;"></div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const submitBtn = document.getElementById("submit-btn");
+            const eventId = "{{ event_id }}";
+        
+            fetch(`/check-event-status/${eventId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.available) {
+                        submitBtn.textContent = "Registration Closed";
+                        submitBtn.disabled = true;
+                        submitBtn.style.backgroundColor = "#ccc";
+                    }
+                })
+                .catch(error => console.error("Error checking event status:", error));
+        });
+        </script>
+
+</body>
+</html>

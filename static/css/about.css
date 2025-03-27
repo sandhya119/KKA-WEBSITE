@@ -1,0 +1,229 @@
+body {
+    background-color: #FFD372;
+    text-align: center;
+    padding: 20px;
+}
+html{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color:#FFD372; /* Unified background */
+    color: #333;
+}
+.team-section{
+    margin-top: 40px;
+}
+.team-member:last-child {
+    margin-bottom: 40px; /* Adds space below the last team member */
+}
+
+.team-section h2 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.hero p {
+    font-size: 18px;
+    max-width: 700px;
+    margin: 0 auto;
+    color: #004d40; /* Change this to the desired color */
+    font-weight: bold; /* Optional: Makes the text stand out */
+}
+.hero h2 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #004d40;
+}
+.hero{
+background-color:#FFD372;
+  
+}
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.team-member {
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.team-member img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.team-member h3 {
+    font-size: 16px;
+    margin: 10px 0 5px;
+}
+
+.team-member p {
+    font-size: 14px;
+    color: #004d40; /* Change this to the desired color */
+
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.team-member img {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    border-radius: 10px; /* Optional: for rounded corners */
+}
+
+.team-member img:hover {
+    transform: scale(1.1); /* Slight zoom effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #FFD372;
+}
+
+header {
+    background-color:#ffc342;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.container {
+    max-width: 1000px;  /* Increases container width */
+    width: 90%;  /* Makes it responsive */
+    margin: 20px ;  
+    margin-bottom: 40px ;/* Centers the container */
+    padding: 30px;  /* Adds spacing inside */
+    background: #fff;  /* Ensures good readability */
+    border-radius: 10px;  /* Smooth edges */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+
+/* Heading (h2) */
+h2 {
+    font-size: 64px;
+    margin-top: 30px;
+    margin-bottom:30px;
+    font-weight: bold;
+    color:#ffc342; /* Dark text */
+    font-family: 'Poppins', sans-serif; /* Use a clean, modern font */
+    margin-bottom: 10px;
+}
+
+/* Paragraph (p) */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-bottom: 50px;
+    background: #f8f9fa; /* Light background for elegance */
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+
+}
+
+.container h2 {
+    font-size: 24px;
+    color: #004d40; /* Change this to the desired color */
+    /* Deep green for a warm cultural touch */
+    text-align: center;
+    margin-bottom: 15px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+}
+
+.container p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    line-height: 1.6;
+    text-align: justify;
+    color: #333;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container ul {
+    list-style: none;
+    padding: 0;
+}
+
+.container ul li {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #444;
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container ul li::before {
+    content: "•"; /* Bullet point */
+    color: #004d40; /* Change this to the desired color */
+    /* Teal for accent */
+    font-size: 20px;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 2px;
+}
+
+.container p strong {
+    color: #004d40; /* Change this to the desired color */
+    /* Teal accent for emphasis */
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    .container h2 {
+        font-size: 22px;
+    }
+
+    .container p, .container ul li {
+        font-size: 16px;
+    }
+}
+
+
+ul {
+    padding-left: 20px; /* Adjust the space between bullets and text */
+    margin-left: 0; /* Remove extra indentation */
+    list-style-position: inside; /* Moves bullets closer */
+}
+
+li {
+    font-size: 20px;
+    line-height: 1.5;
+    color: #333;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 5px; /* Reduce space between list items */
+}
+.container:hover {
+    transform: scale(1.02); /* Slightly enlarges the container */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhances shadow */
+    background: #f9f9f9;  /* Light background change */
+}
+.about-page {
+    background-image: none !important;
+    background-color: white; /* Optional: Set a plain background */
+}
+
+
+

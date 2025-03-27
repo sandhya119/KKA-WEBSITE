@@ -1,0 +1,87 @@
+/* Sponsors Section Styles */
+.our-partners {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #f8f8f8 !important;
+    color: #ffc342; /* Text color added */
+    font-size: 24px;/* Uniform text size */
+    margin: 0; 
+}
+
+/* Ensure only our sponsors' headings are affected */
+.our-partners h2 {
+    font-size: 32px; /* Set a fixed size */
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.our-partners-container {
+    width: 100%;
+    height: 120px;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+
+}
+
+.our-partners-list {
+    display: flex;
+    flex-wrap: wrap; /* Wraps logos on smaller screens */
+    gap: 15px; 
+    justify-content: center;
+    animation: scroll 10s linear infinite;
+}
+
+.our-partners-list img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    margin: 5px;
+}
+
+/* Prevent text size issues from other pages */
+.our-partners p {
+    font-size: 18px;
+    color: #333;
+    text-align: center;
+}
+
+.logo-container {
+    width: 120px; /* Fixed width */
+    height: 120px; /* Fixed height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff; /* Optional background */
+    overflow: hidden;
+}
+
+.logo-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Ensures logos fit inside the square */
+}
+
+/* Animation */
+@keyframes scroll {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+@media (max-width: 768px) {
+    .logo-container {
+        width: 22vw; /* Larger logos for mobile */
+        max-width: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-container {
+        width: 30vw;
+        max-width: 100px; /* Even smaller for compact screens */
+    }
+}

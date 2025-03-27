@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team</title>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nheader.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/gallery.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- FontAwesome Icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+    <!-- Navbar -->
+    <custom-navbar 
+        data-home="{{ url_for('home') }}"
+        data-about="{{ url_for('aboutus') }}"
+        data-news="{{ url_for('news') }}"
+        data-past-events="{{ url_for('past_events') }}"
+        data-upcoming-events="{{ url_for('upcoming_events') }}"
+        data-gallery="{{ url_for('gallery') }}"
+        data-contact="{{ url_for('contact') }}"
+        data-logo="{{ url_for('static', filename='images/logo.png') }}"
+        data-menu-icon="{{ url_for('static', filename='images/hamburger.png') }}"
+        data-authenticated="{{ 'true' if 'user_id' in session else 'false' }}"
+    data-profile="{{ url_for('profile') }}"
+    data-logout="{{ url_for('logout') }}"
+    data-login="{{ url_for('login') }}">
+    </custom-navbar>
+
+    <!-- Main Section -->
+    <section id="mainhead">
+        <div id="popup" class="popup-container" style="display: none;">
+            <div class="popup-content">
+                <p id="poppy">Are you already a part of the family?</p>
+                <button onclick="alreadyMember()">Yes</button>
+                <button onclick="notMember()">No</button>
+                <button class="close-btn" onclick="closePopup()">Close</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hero Section -->
+    <section class="hero" style="background-image: url('/static/images/bck.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+        <h2>ಗ್ಯಾಲರಿ</h2>
+        <h2>Gallery</h2>
+        <p>Explore our events and activities that celebrate our Konkani culture and community.</p>
+        <div class="carousel">
+            <div class="active"></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </section>
+
+    <!-- <section>
+        {% if gallery_images %}
+            <div class="gallery">
+                {% for image in gallery_images %}
+                    <div class="card">
+                        <img src="{{ url_for('static', filename=image.file_path) }}" 
+                             alt="{{ image.title }}" loading="lazy">
+                        <div class="card-content">
+                            <h3>{{ image.title }}</h3> 
+                            <p>{{ image.description }}</p> 
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No images available in the gallery.</p>
+        {% endif %}
+    </section> -->
+<!-- Updated gallery.html -->
+<!-- Gallery Section -->
+<!-- Updated Gallery Section -->
+<section class="gallery-section">
+    <div class="gallery-container">
+        <button class="scroll-left">&#8249;</button>
+        <div class="thumbnails-wrapper">
+            <div class="thumbnails">
+                {% for date, images in gallery_by_date.items() %}
+                    {% for image in images %}
+                        <div class="thumbnail-wrapper">
+                            <img class="thumbnail" src="{{ url_for('static', filename=image.file_path) }}" 
+                                 alt="{{ image.title }}">
+                            <div class="card-content">
+                                <h3>{{ image.title }}</h3>
+                                <a href="{{ url_for('gallery_details', event_id=image.id) }}" class="btn">Find out more</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+        <button class="scroll-right">&#8250;</button>
+    </div>
+</section>
+
+
+<div class="sponsors-wrapper">
+    {% include 'sponsors.html' %}
+</div>
+<!-- Footer -->
+
+ <section>
+    <div class="container1">
+        <footer class="footer">
+            <div class="footer-column">
+                
+                <p>Karaval Konkans Australia is a not-for-profit community organization formed in October 2024 with an intention to unite all Konkani-speaking people from Karaval India.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-instagram" style="color: #E4405F;"></i></a>
+                    <a href="#"><i class="fa-brands fa-whatsapp" style="color: #25D366;"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook" style="color: #1877F2;"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube" style="color: #FF0000;"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-column2" id="footer">
+                <a href="{{ url_for('contact') }}" style="color: white;">Contact Us</a>
+                <p>Email: <a href="mailto:info@karavalkonkans.org.au" style="color: white;">info@karavalkonkans.org.au</a></p>
+            </div>
+
+            <div class="copyright">
+                © Karaval Konkans Australia Inc. All rights reserved.
+            </div>
+        </footer>
+    </div>
+</section>
+<!-- Scripts -->
+<script src="{{ url_for('static', filename='scripts/script.js') }}"></script>
+<script src="{{ url_for('static', filename='scripts/header.js') }}"></script>
+
+</body>
+</html>

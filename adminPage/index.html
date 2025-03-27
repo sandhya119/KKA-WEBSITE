@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header class="admin-header">
+        <div class="logo">
+            <img src="1.png" alt="Admin Logo">
+        </div>
+        <div class="admin-panel">
+            <img src="profile.webp" alt="Admin Avatar" class="profile-img">
+            <span>Admin Panel</span>
+        </div>
+    </header>
+
+
+
+    <div class="container">
+        <div class="sidebar">
+            <button class="tab-button" onclick="showSection('adminProfile')">Admin Profile</button>
+            <button class="tab-button" onclick="showSection('Dashboard')">Dashboard</button>
+            <button class="tab-button" onclick="showSection('Content Management')">Content Management</button>
+            <button class="tab-button" onclick="showSection('userLogin')">User Login Details</button>
+            <button class="tab-button" onclick="showSection('registrations')">Registrations</button>
+            
+            
+        </div>
+
+        <div class="main-content">
+            <!-- Admin Profile Section -->
+            <div class="section" id="adminProfile">
+                <h3 class="profile-header">Admin Profile</h3>
+                <div class="profile-card">
+                    <div class="profile-avatar">
+                        <img src="profile.webp" alt="Admin Avatar" class="avatar-img">
+                    </div>
+                    <div class="profile-info">
+                        <p><strong>Name:</strong> Admin Name</p>
+                        <p><strong>Email:</strong> admin@example.com</p>
+                        <p><strong>Role:</strong> Administrator</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Section -->  
+            <div class="section" id="Dashboard">
+                <h3 style="background-color: rgb(65, 63, 62); padding: 20px; color: white;">Dashboard</h3>
+                <div class="analytics-summary">
+                    <div class="analytics-card">
+                        <h4>Total Logins</h4>
+                        <p id="totalLogins">0</p> <!-- Dynamically updated -->
+                    </div>
+                    <div class="analytics-card">
+                        <h4>Total Registrations</h4>
+                        <p id="totalRegistrations">0</p> <!-- Dynamically updated -->
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <h3>Users by Capital City</h3>
+                    <canvas id="cityChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>Users by Postcode</h3>
+                    <canvas id="postcodeChart"></canvas>
+                </div>
+            </div>
+
+            <!--content uploading-->
+            <div class="section" id="Content Management">
+                <h3 style="background-color: rgb(65, 63, 62); padding: 20px; color: white;">Upload Content</h3>
+            
+            <div class="content-upload">
+                <form id="contentForm" enctype="multipart/form-data">
+                    <label>Title:</label>
+                    <input type="text" id="title" name="title" required>
+            
+                    <label>Description:</label>
+                    <textarea id="description" name="description"></textarea>
+            
+                    <label>Upload File:</label>
+                    <input type="file" id="file" name="file" accept="image/*,.pdf,.docx">
+            
+                    <button type="submit">Upload</button>
+                </form>
+            </div>
+        </div>
+            
+
+
+            <!-- User Login Details Section -->
+            <div class="section" id="userLogin">
+                <h3 style="background-color: rgb(65, 63, 62); padding: 20px; color: white;">User Login Details</h3>
+                <input type="text" id="userSearch" placeholder="Search by name" onkeyup="searchTable('userTable', 'userSearch')">
+                
+
+                <table id="userTable">
+                    <thead>
+                        <tr>
+                            <th>Serial Number</th> <!-- Serial Number Column -->
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Nearest Capital City</th>
+                            <th>Postcode</th>
+                            <th>Phone Number</th>
+                            <th>Adults in Family</th>
+                            <th>Children (below 18)</th>
+                            <th>Interests</th>
+                            <th>Comment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Add user data rows here -->
+                        <tr>
+                            <td>1</td> <!-- Serial Number -->
+                            <td>John Doe</td>
+                            <td>john.doe@example.com</td>
+                            <td>Melbourne</td>
+                            <td>12345</td>
+                            <td>+987654321</td>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>Technology, Travel</td>
+                            <td>Looking forward to meeting others.</td>
+                        </tr>
+                        <tr>
+                            <td>2</td> <!-- Serial Number -->
+                            <td>Rohan Doe</td>
+                            <td>Rohan.doe@example.com</td>
+                            <td>Adelaide</td>
+                            <td>6789</td>
+                            <td>+9876564976</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>Technology, Travel</td>
+                            <td>Looking forward to meeting others.</td>
+                        </tr>
+                        <tr>
+                            <td>3</td> <!-- Serial Number -->
+                            <td>Ananya</td>
+                            <td>Ananya@example.com</td>
+                            <td>Melbourne</td>
+                            <td>12345</td>
+                            <td>+98765112976</td>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>Technology, Travel</td>
+                            <td>Looking forward to meeting others.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Registrations Section -->
+            <div class="section" id="registrations">
+                <h3 style="background-color: rgb(65, 63, 62); padding: 20px; color: white;">Event: Konkani Mai Bhas</h3>
+                <input type="text" id="registrationSearch" placeholder="Search users" onkeyup="searchTable('registrationTable', 'registrationSearch')">
+            
+                <button id="exportPDF" class="tab-button">Export Registered Users to PDF </button>
+            
+                <table id="registrationTable">
+                    <thead>
+                        <tr>
+                            <th>Serial Number</th> <!-- Serial Number Column -->
+                            <th>Full Name</th>
+                            <th>Email</th>
+                            <th>Phone Number</th>
+                            <th>Number of People</th>
+                            <th>Adults</th>
+                            <th>Children</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Add registration data rows here -->
+                        <tr>
+                            <td>1</td> <!-- Serial Number -->
+                            <td>Jane Smith</td>
+                            <td>jane.smith@example.com</td>
+                            <td>+123987654</td>
+                            <td>4</td>
+                            <td>2</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>2</td> <!-- Serial Number -->
+                            <td>John Doe</td>
+                            <td>john.doe@example.com</td>
+                            <td>+987654321</td>
+                            <td>3</td>
+                            <td>1</td>
+                            <td>2</td>
+                        </tr>
+                        <!-- More rows can be added dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Include jsPDF Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <script src="script.js"></script>
+</body>   
+</html>
